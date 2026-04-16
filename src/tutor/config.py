@@ -28,6 +28,9 @@ REPO = Path(__file__).resolve().parents[2]
 AUTH_DIR = REPO / "auth_state"
 PANOPTO_STATE = AUTH_DIR / "panopto.json"
 BLACKBOARD_STATE = AUTH_DIR / "blackboard.json"
+EXAMS_STATE = AUTH_DIR / "exams.json"
+
+EXAMS_HOST = "https://exams.doc.ic.ac.uk"
 SUBJECTS_DIR = REPO / "subjects"
 WEBUI_DIR = REPO / "webui"
 KNOWLEDGE_DIR = REPO / ".claude" / "knowledge"
@@ -89,7 +92,7 @@ __all__ = [
     "PANOPTO_HOST", "BLACKBOARD_HOST", "BB_COOKIE_ALLOWLIST", "PANOPTO_DEFAULT_LANG",
     "SUBJECTS", "SUBJECT_SLUGS", "SubjectMeta", "subject",
     "ACADEMIC_YEAR", "ACADEMIC_YEAR_START", "TERM_DATES", "TERMS", "EXAMS",
-    "REPO", "AUTH_DIR", "PANOPTO_STATE", "BLACKBOARD_STATE", "SUBJECTS_DIR", "WEBUI_DIR",
-    "KNOWLEDGE_DIR", "COURSE_MAP_JSON", "COURSE_MAP_MD",
+    "REPO", "AUTH_DIR", "PANOPTO_STATE", "BLACKBOARD_STATE", "EXAMS_STATE", "EXAMS_HOST",
+    "SUBJECTS_DIR", "WEBUI_DIR", "KNOWLEDGE_DIR", "COURSE_MAP_JSON", "COURSE_MAP_MD",
     "USER_CONFIG_PATH", "Preferences", "UserConfig", "USER",
 ]

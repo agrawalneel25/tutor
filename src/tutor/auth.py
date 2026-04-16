@@ -14,14 +14,16 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, BrowserContext
 from rich import print
 
-from .config import PANOPTO_HOST, BLACKBOARD_HOST, PANOPTO_STATE, BLACKBOARD_STATE
+from .config import PANOPTO_HOST, BLACKBOARD_HOST, PANOPTO_STATE, BLACKBOARD_STATE, EXAMS_STATE, EXAMS_HOST
 
 
 PANOPTO_HOME = f"{PANOPTO_HOST}/Panopto/Pages/Home.aspx"
 BLACKBOARD_HOME = f"{BLACKBOARD_HOST}/ultra/course"
+EXAMS_HOME = f"{EXAMS_HOST}/"
 
 PANOPTO_SUCCESS = "imperial.cloud.panopto.eu/Panopto/Pages"
 BLACKBOARD_SUCCESS = "bb.imperial.ac.uk/ultra"
+EXAMS_SUCCESS = "exams.doc.ic.ac.uk"
 
 
 def _wait_and_save(ctx: BrowserContext, url: str, success_substr: str, state_path: Path, label: str) -> None:
@@ -56,23 +58,33 @@ def login_blackboard() -> None:
         browser.close()
 
 
-def login_all() -> None:
-    """Unified SSO: one browser, one Imperial login, two cookie dumps.
+def login_exams(username: str = "", password: str = "") -> None:
+    """Single-host: exams.doc.ic.ac.uk. Passes HTTP Basic Auth credentials."""
+    http_credentials = {"username": username, "password": password} if username else None
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)
+        ctx = browser.new_context(http_credentials=http_credentials)
+        ctx.new_page()
+        _wait_and_save(ctx, EXAMS_HOME, EXAMS_SUCCESS, EXAMS_STATE, "Exams site")
+        browser.close()
 
-    Works because Imperial uses a single Azure AD IDP for both Panopto and
-    Blackboard — once the browser context has an IDP session cookie, the
-    second host SSO redirects through without user interaction.
+
+def login_all() -> None:
+    """Unified SSO: one browser, one Imperial login, three cookie dumps.
+
+    Works because Imperial uses a single Azure AD IDP — once the browser
+    context has an IDP session cookie, subsequent hosts SSO silently.
     """
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
         ctx = browser.new_context()
         ctx.new_page()
-        print("[bold]Imperial SSO[/]  -  one login covers both Panopto and Blackboard.")
+        print("[bold]Imperial SSO[/]  -  one login covers Panopto, Blackboard, and Exams.")
         _wait_and_save(ctx, PANOPTO_HOME, PANOPTO_SUCCESS, PANOPTO_STATE, "Panopto")
-        # Reuse the same context: the IDP session is already established.
         _wait_and_save(ctx, BLACKBOARD_HOME, BLACKBOARD_SUCCESS, BLACKBOARD_STATE, "Blackboard")
+        _wait_and_save(ctx, EXAMS_HOME, EXAMS_SUCCESS, EXAMS_STATE, "Exams site")
         browser.close()
-    print("[green]Done  -  both hosts authenticated from one browser session.[/]")
+    print("[green]Done  -  all three hosts authenticated from one browser session.[/]")
 
 
 def cookies_for_httpx(state_path: Path) -> dict[str, str]:
