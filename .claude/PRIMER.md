@@ -49,8 +49,15 @@ uv run uni panopto fetch analysis <deliveryId> --n 12 --title "Uniform continuit
 
 Imperial SSO cookies typically last weeks but can expire mid-session. If an `httpx` call 302s to login, run `uv run uni auth panopto` (or `blackboard`) again.
 
+## Known IDs
+
+**Always read `.claude/knowledge/known-ids.md` before scraping.** It has the Panopto folder GUIDs + Blackboard course IDs for all three subjects — don't re-run `uni panopto folders` or `uni bb courses` unless IDs look stale.
+
+## MCP
+
+- `notion-query` (http, worker URL in `.mcp.json`) — use this to read the missed-lectures / missed-problem-sheets queue from Notion.
+
 ## Known unknowns
 
-- Exact Panopto folder IDs for Advit's Analysis/Calc/LinAlg — discover via `uni panopto folders` on first run.
-- Blackboard Ultra's `/learn/api/public/v1/*` access from student cookie — untested; may need UI scraping fallback.
+- Caption availability varies per lecture — older sessions may have no transcript; the client raises a clear error if the SRT body is empty.
 - OAuth client registration (both platforms) is a future option if scraping breaks.

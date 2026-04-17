@@ -28,8 +28,17 @@ class Content:
     has_children: bool
 
 
+# Only these cookies are meaningful to Blackboard; sending the full Azure AD
+# cookie set triggers nginx "Request Header Or Cookie Too Large" (400).
+_BB_COOKIE_ALLOWLIST = {
+    "BbRouter", "JSESSIONID", "AWSELB", "AWSELBCORS",
+    "shib_idp_session", "samlCookie", "SSOCOOKIEPULLED", "s_session_id",
+}
+
+
 def _client() -> httpx.Client:
-    cookies = cookies_for_httpx(BLACKBOARD_STATE)
+    all_cookies = cookies_for_httpx(BLACKBOARD_STATE)
+    cookies = {k: v for k, v in all_cookies.items() if k in _BB_COOKIE_ALLOWLIST}
     return httpx.Client(
         base_url=BLACKBOARD_HOST,
         cookies=cookies,

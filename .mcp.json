@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "notion-query": {
+      "type": "http",
+      "url": "https://notion-query-mcp.advitarora2.workers.dev/mcp"
+    }
+  }
+}
