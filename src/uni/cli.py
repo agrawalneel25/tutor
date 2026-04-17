@@ -125,12 +125,25 @@ def cmd_bb_courses() -> None:
         print(f"  {c.course_id}  {c.name}  [dim]({c.id})[/]")
 
 
+@bb_app.command("roots")
+def cmd_bb_roots(course_id: str) -> None:
+    """Top-level items of a course (entry points for `bb tree`)."""
+    for it in bb.list_roots(course_id):
+        kind = "[cyan]folder[/]" if it.is_folder else "leaf"
+        print(f"  {kind}  {it.content_id}  {it.title}")
+
+
 @bb_app.command("tree")
-def cmd_bb_tree(course_id: str) -> None:
-    """Dump the full content tree of a course."""
-    for trail, item in bb.walk_tree(course_id):
+def cmd_bb_tree(
+    course_id: str,
+    content_id: str = typer.Argument(..., help="Start node (get one via `bb roots`)"),
+    depth: int = typer.Option(5, "--depth"),
+) -> None:
+    """Scrape the Learn Original content tree starting at content_id."""
+    for trail, item in bb.scrape(course_id, content_id, max_depth=depth):
         indent = "  " * len(trail)
-        print(f"{indent}- {item.title}  [dim]{item.content_handler} / {item.id}[/]")
+        marker = "[cyan]/[/]" if item.is_folder else (f"[green]({len(item.files)})[/]" if item.files else "-")
+        print(f"{indent}{marker} {item.title}  [dim]{item.content_id}[/]")
 
 
 @bb_app.command("pull")
@@ -138,13 +151,17 @@ def cmd_bb_pull(
     subject: str,
     course_id: str,
     content_id: str,
-    name: str = typer.Option(..., "--name", help="What to call this material, e.g. 'week-5-slides'"),
+    name: str = typer.Option(..., "--name", help="Subfolder name under subjects/{subject}/materials/"),
+    recursive: bool = typer.Option(True, "--recursive/--flat"),
 ) -> None:
-    """Download all attachments of a Blackboard content item."""
+    """Download every file attachment under a Blackboard content item."""
     out = _subject_dir(subject) / "materials" / _slug(name)
-    written = bb.download_attachments(course_id, content_id, out)
-    for p in written:
-        print(f"  [green]✓[/] {p}")
+    written = bb.download_folder_files(course_id, content_id, out, recursive=recursive)
+    print(f"[green]Done[/] — {len(written)} files into {out}")
+    for p in written[:20]:
+        print(f"  ✓ {p.relative_to(_subject_dir(subject))}")
+    if len(written) > 20:
+        print(f"  ... and {len(written)-20} more")
 
 
 def main() -> None:

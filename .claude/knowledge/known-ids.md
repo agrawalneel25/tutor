@@ -31,11 +31,22 @@ uv run uni bb courses
 
 ## Blackboard conventions
 
-- Only these cookies belong in requests: `BbRouter`, `JSESSIONID`, `AWSELB`, `AWSELBCORS`, `shib_idp_session`, `samlCookie`, `SSOCOOKIEPULLED`, `s_session_id`.
-- Sending the full Azure AD cookie set (`ESTSAUTH*`, `esctx-*`, etc.) trips nginx's header size limit → `400 Request Header Or Cookie Too Large`. `blackboard._client()` already filters.
+**Key insight:** Imperial's JMC courses are "Ultra-wrapped Learn Original" — Ultra chrome, classic content backend. `/learn/api/*` only exposes Ultra's top-level shell (Homepage + Reading List). The real material lives at `/webapps/blackboard/content/listContent.jsp` and is scraped as HTML.
+
+- Cookie allowlist: `BbRouter`, `JSESSIONID`, `AWSELB`, `AWSELBCORS`, `shib_idp_session`, `samlCookie`, `SSOCOOKIEPULLED`, `s_session_id`. Full Azure AD cookie set (`ESTSAUTH*`, `esctx-*`) trips nginx header size → `400 Request Header Or Cookie Too Large`.
 - Student account: `aa5925`, student ID `02691878`, Blackboard user ID `_6250442_1`.
-- Content listing: `/learn/api/v1/courses/{id}/contents?parentId=...` (cookie-auth). The documented `/public/v1/.../children` 403s for student cookies.
-- Ultra content schema: folder detection via `contentDetail["resource/x-bb-folder"].isFolder`, not the documented Public-v1 shape. Deep content is often embedded (iframe to old Learn Original) — REST visibility is limited past 2 levels. Falls back to Playwright scraping if we need slide PDFs that aren't surfaced.
+- Entry pattern: `uni bb roots <courseId>` → REST, gives `Homepage` content_id → then `uni bb tree <courseId> <homepageId>` scrapes the Learn Original subtree.
+- Folder page parse: `ul#content_listContainer > li` items. Each `<li id="contentListItem:_XXXX_1">` carries the content_id. The `<img class="item_icon">` `alt` attribute gives the type (`Content Folder`, `File`, `Web Link`, `Item`, ...). For `File` items, the `<h3> <a>` href is the direct `/bbcswebdav/...` download.
+- File URLs: `/bbcswebdav/pid-{n}-dt-content-rid-{n}_1/xid-{n}_1` — served 200 with cookie auth, `Content-Disposition` gives the real filename.
+
+## Analysis 1 known content tree (2025/26)
+
+- Homepage: `_3554584_1`
+- Lecture Notes: `_3658112_1` — contains "Gapped" and "Complete" subfolders, plus full handwritten PDF
+- Problem Sheets: `_3658113_1`
+- Coursework 2: `_3658114_1`
+- Midterm Past Papers: `_3661579_1`
+- Fall 2025 Materials (archive): `_3658111_1`
 
 ## Notion queue
 

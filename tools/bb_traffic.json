@@ -1,0 +1,252 @@
+[
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/users/me?expand=systemRoles,insRoles",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/themes/_15_1/settings",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/featureFlags/feature.dark.mode",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/public/v1/lti/placements?type=UltraUI",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/utilities/timeUntilBbSessionInactive?forceLogout=false",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/utilities/timeUntilBbSessionInactive?forceLogout=true",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1?expand=instructorsMembership,+instructorsMembership.courseRole,+effectiveAvailability,+isChild",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/public/v1/uploads/settings",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/featureFlags/feature.system.settings.gradepill.decimal.config",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/systemPreferences/gradepill.decimal.config.preference.settings",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/systemPreferences/gradepill.rounding.mode.preference.settings",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1/entitlements",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1/spreview",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1/users/_6250442_1?expand=courseRole",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/systemPreferences/gradepill.decimal.config.preference.settings",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/systemPreferences/gradepill.rounding.mode.preference.settings",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/terms",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1/tools",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/utilities/entitlements",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1/tools/announcements",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1/tools/groups",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/users/_6250442_1/memberships?expand=course.effectiveAvailability,course.permissions,courseRole&includeCount=true&limit=10000",
+    "type": "xhr"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/blackboard/execute/courseMain?course_id=_46862_1",
+    "type": "document"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/featureFlags/feature.course.course-access",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/featureFlags/feature.course.course-overview",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1/tools/messages",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/featureFlags/feature.admin.tool.discussions.toggle",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/featureFlags/feature.course.achievements",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/featureFlags/feature.course.achievements.tab.student.visibility",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/featureFlags/feature.course.achievements.tab-unread-count",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/featureFlags/feature.course.switcher",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/users/me",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1/spreview",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1/tools/discussion_board",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/learn/api/v1/courses/_46862_1/tools/bb-achievements-ultra",
+    "type": "fetch"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/blackboard/content/listContent.jsp?course_id=_46862_1&content_id=_3554584_1",
+    "type": "document"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/vtbe-tinymce/css/prism/prism.css?v=4000.12.0-rel.35+655ff5b",
+    "type": "stylesheet"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/videointegration/css/video-integration.css?v=4000.12.0-rel.35+655ff5b_4000.12.0-rel.35+655ff5b",
+    "type": "stylesheet"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/allyintegration/css/ally-integration.css?v=4000.12.0-rel.35+655ff5b_4000.12.0-rel.35+655ff5b",
+    "type": "stylesheet"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/blackboard/dwr_open/interface/UserDataDWRFacade.js?v=4000.12.0-rel.35+655ff5b_4000.12.0-rel.35+655ff5b",
+    "type": "script"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/blackboard/dwr_open/interface/MashupDWRFacade.js?v=4000.12.0-rel.35+655ff5b_4000.12.0-rel.35+655ff5b",
+    "type": "script"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/blackboard/dwr_open/interface/CourseMenuDWRFacade.js?v=4000.12.0-rel.35+655ff5b_4000.12.0-rel.35+655ff5b",
+    "type": "script"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/blackboard/dwr_open/interface/UserPageInstructionsSettingDWRFacade.js?v=4000.12.0-rel.35+655ff5b_4000.12.0-rel.35+655ff5b",
+    "type": "script"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/blackboard/dwr_open/interface/UserDWRFacade.js?v=4000.12.0-rel.35+655ff5b_4000.12.0-rel.35+655ff5b",
+    "type": "script"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/vtbe-tinymce/app/WIRISplugins.js?viewer=image&async=true&v=4000.12.0-rel.35+655ff5b_4000.12.0-rel.35+655ff5b",
+    "type": "script"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/achievements/js/achievement.js",
+    "type": "script"
+  },
+  {
+    "method": "GET",
+    "url": "https://bb.imperial.ac.uk/webapps/achievements/css/achievements.css",
+    "type": "stylesheet"
+  },
+  {
+    "method": "POST",
+    "url": "https://bb.imperial.ac.uk/webapps/blackboard/dwr_open/call/plaincall/UserDataDWRFacade.getStringTempScope.dwr",
+    "type": "xhr"
+  },
+  {
+    "method": "POST",
+    "url": "https://bam.nr-data.net/1/232bf20b67?a=1293953979&v=1.312.1&to=blwDZBYHCkBRW0QLVlcWMkQWExBAcVtEC1ZXFgNcBQUPUV9ZQgYXTlwDURQWFx1SVFEBUltWAEIASAdcRUpDB1RcVxQeFxIWRkRLHiFWTEsSVSkDCkZ0UUMSVVhAIFMQDwtd&rst=1720&ck=0&s=cefdd9112d63bceb&ref=https://bb.imperial.ac.uk/webapps/blackboard/content/listContent.jsp&ptid=b17c9fb5382ebd0b&af=err,spa,xhr,stn,ins&ap=83&be=200&fe=1463&dc=203&fsh=1&perf=%7B%22timing%22:%7B%22of%22:1776435937360,%22n%22:0,%22r%22:0,%22re%22:86,%22f%22:86,%22dn%22:86,%22dne%22:86,%22c%22:86,%22s%22:86,%22ce%22:86,%22rq%22:89,%22rp%22:201,%22rpe%22:209,%22di%22:403,%22ds%22:403,%22de%22:404,%22dc%22:1663,%22l%22:1663,%22le%22:1664%7D,%22navigation%22:%7B%22rc%22:1%7D%7D&fp=412&fcp=412",
+    "type": "xhr"
+  }
+]
