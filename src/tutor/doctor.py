@@ -148,7 +148,7 @@ def run_all() -> bool:
     t.add_column("Status")
     t.add_column("Detail", overflow="fold")
     for c in results:
-        t.add_row(c.name, "[green]✓[/]" if c.ok else "[red]✗[/]", c.detail)
+        t.add_row(c.name, "[green]OK[/]" if c.ok else "[red]FAIL[/]", c.detail)
     console.print(t)
     ok = all(c.ok for c in results)
     rprint("[bold green]All green.[/]" if ok else "[bold red]Some checks failed.[/]")

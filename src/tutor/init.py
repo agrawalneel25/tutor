@@ -58,7 +58,7 @@ def _collect_config() -> UserConfig:
     cfg.preferences.hint_style = hint_style
     cfg.preferences.teach_mode = teach_mode
     cfg.save()
-    rprint(f"[green]✓ saved[/] {USER_CONFIG_PATH}")
+    rprint(f"[green]OK saved[/] {USER_CONFIG_PATH}")
     return cfg
 
 
