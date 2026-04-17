@@ -1,0 +1,22 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.python-version
+
+# Auth — never commit cookies
+auth_state/
+
+# Lecture material — personal, keep local
+subjects/*/lectures/
+subjects/*/materials/
+!subjects/*/last-done.md
+
+.DS_Store
+.pytest_cache/
