@@ -67,20 +67,41 @@ def list_courses() -> list[Course]:
 
 
 def list_contents(course_id: str, parent_id: str | None = None) -> list[Content]:
-    path = f"/learn/api/public/v1/courses/{course_id}/contents"
+    """Children of a course folder. Uses /learn/api/v1 with parentId query
+    because /public/v1/.../children returns 403 for student cookies.
+
+    Schema is Ultra's internal format, not the documented Public v1 one:
+      - `id`, `title`, `contentDetail` present.
+      - Folder-ness signaled by `contentDetail["resource/x-bb-folder"].isFolder`.
+      - `contentHandler` may be a dict or missing; we flatten to a short string.
+    """
+    path = f"/learn/api/v1/courses/{course_id}/contents"
+    params: dict[str, str | int] = {"limit": 200}
     if parent_id:
-        path = f"/learn/api/public/v1/courses/{course_id}/contents/{parent_id}/children"
+        params["parentId"] = parent_id
     with _client() as c:
-        r = c.get(path, params={"limit": 200})
+        r = c.get(path, params=params)
         r.raise_for_status()
         out: list[Content] = []
         for row in r.json().get("results", []):
-            handler = (row.get("contentHandler") or {}).get("id", "")
+            detail = row.get("contentDetail") or {}
+            is_folder = False
+            handler = ""
+            for key, val in detail.items():
+                handler = key  # e.g. "resource/x-bb-folder", "resource/x-bb-file"
+                if isinstance(val, dict) and val.get("isFolder"):
+                    is_folder = True
+                break
+            ch = row.get("contentHandler")
+            if isinstance(ch, dict):
+                handler = ch.get("id") or handler
+            elif isinstance(ch, str):
+                handler = ch or handler
             out.append(Content(
                 id=row["id"],
                 title=row.get("title", ""),
                 content_handler=handler,
-                has_children=row.get("hasChildren", False),
+                has_children=is_folder,
             ))
         return out
 
@@ -106,12 +127,18 @@ def download_attachments(course_id: str, content_id: str, out_dir: Path) -> list
     return written
 
 
-def walk_tree(course_id: str) -> list[tuple[list[str], Content]]:
-    """DFS the content tree. Yields (path_names, content)."""
+def walk_tree(course_id: str, max_depth: int = 6) -> list[tuple[list[str], Content]]:
+    """DFS the content tree. Dedupes by id (Ultra can return cycles)."""
     out: list[tuple[list[str], Content]] = []
+    seen: set[str] = set()
 
     def _walk(parent: str | None, trail: list[str]) -> None:
+        if len(trail) > max_depth:
+            return
         for item in list_contents(course_id, parent):
+            if item.id in seen:
+                continue
+            seen.add(item.id)
             out.append((trail, item))
             if item.has_children:
                 _walk(item.id, trail + [item.title])

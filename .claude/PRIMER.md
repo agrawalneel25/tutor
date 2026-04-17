@@ -55,7 +55,20 @@ Imperial SSO cookies typically last weeks but can expire mid-session. If an `htt
 
 ## MCP
 
-- `notion-query` (http, worker URL in `.mcp.json`) — use this to read the missed-lectures / missed-problem-sheets queue from Notion.
+- `notion-query` (http, worker URL in `.mcp.json`) — read the missed-lectures queue.
+  - Database ID + schema + canonical queries are in `.claude/knowledge/known-ids.md`.
+  - After finishing notes on a lecture, mark its Notion row `Status: Done` via `mcp__notion-query__update_page`.
+
+## Catchup loop (what a typical session looks like)
+
+1. Query Notion for `Type=Lecture, Status≠Done`, optionally filtered by `Module`.
+2. For each missed lecture, resolve its Panopto session:
+   - Look up the subject's Panopto folder ID in `known-ids.md`.
+   - `uv run uni panopto list <folder-id>` — find the session matching lecture N (usually by index/date).
+3. `uv run uni panopto fetch <subject> <deliveryId> --n <N> --title "..."` — pulls transcript.
+4. Run `lecturer` subagent on the lecture folder → `teach.md`.
+5. Run `note-taker` subagent → `notes.md` + appends to `subjects/{subject}/last-done.md`.
+6. Update the Notion row `Status = Done`.
 
 ## Known unknowns
 
