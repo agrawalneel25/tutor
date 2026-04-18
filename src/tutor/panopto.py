@@ -1,6 +1,6 @@
 """Panopto client. Uses saved SSO cookies against the /api/v1/* REST endpoints.
 
-These endpoints are the same ones the web UI hits. Session cookie auth works —
+These endpoints are the same ones the web UI hits. Session cookie auth works  - 
 no OAuth client registration needed.
 
 Docs (schemas): https://imperial.cloud.panopto.eu/Panopto/api/docs/index.html
@@ -52,9 +52,9 @@ def _client() -> httpx.Client:
 
 def _check_auth(r: httpx.Response) -> None:
     if r.status_code in (301, 302, 303) and "SignIn" in r.headers.get("location", ""):
-        raise RuntimeError("Panopto session expired. Run `uv run uni auth panopto`.")
+        raise RuntimeError("Panopto session expired. Run `uv run tutor auth panopto`.")
     if r.status_code == 401:
-        raise RuntimeError("Panopto 401 — re-auth with `uv run uni auth panopto`.")
+        raise RuntimeError("Panopto 401  -  re-auth with `uv run tutor auth panopto`.")
 
 
 def parse_folder_id(folder_url_or_id: str) -> str:
@@ -89,7 +89,7 @@ def search_folders(query: str = "*", parent_id: str | None = None, max_results: 
 
 
 def list_subfolders(parent_folder_id: str | None = None) -> list[Folder]:
-    """Alias — historical name."""
+    """Alias  -  historical name."""
     return search_folders(parent_id=parent_folder_id)
 
 
@@ -175,7 +175,7 @@ def download_transcript(delivery_id: str, out_path: Path, language: str | None =
         if not r.text.strip():
             raise RuntimeError(
                 f"Transcript empty for {delivery_id} (language={lang}). "
-                f"The session may have no captions — check in the Panopto viewer."
+                f"The session may have no captions  -  check in the Panopto viewer."
             )
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(r.text, encoding="utf-8")

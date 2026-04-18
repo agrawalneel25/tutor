@@ -1,24 +1,25 @@
 [project]
-name = "uni"
-version = "0.1.0"
-description = "Add your description here"
+name = "tutor"
+version = "0.2.0"
+description = "Claude Code study app for Imperial JMC Year 1"
 readme = "README.md"
-authors = [
-    { name = "Advit Arora", email = "advitarora2@gmail.com" }
-]
 requires-python = ">=3.12"
 dependencies = [
     "beautifulsoup4>=4.14.3",
+    "fastapi>=0.115.0",
     "httpx>=0.28.1",
     "lxml>=6.0.4",
     "playwright>=1.58.0",
+    "pypdf>=6.10.2",
     "python-dotenv>=1.2.2",
+    "python-multipart>=0.0.20",
     "rich>=15.0.0",
     "typer>=0.24.1",
+    "uvicorn>=0.34.0",
 ]
 
 [project.scripts]
-uni = "uni:main"
+tutor = "tutor:main"
 
 [build-system]
 requires = ["uv_build>=0.10.12,<0.11.0"]

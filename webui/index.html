@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>tutor</title>
+<link rel="stylesheet" href="/assets/style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMofsBgcke/BBVJELB" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script defer src="/assets/app.js"></script>
+</head>
+<body>
+<aside id="sidebar">
+  <header>
+    <h1>tutor</h1>
+    <p id="user-greeting"></p>
+  </header>
+  <nav id="nav"></nav>
+  <footer>
+    <button id="refresh">Refresh</button>
+  </footer>
+</aside>
+<main id="main">
+  <div id="breadcrumbs"></div>
+  <article id="content">
+    <h2>Welcome</h2>
+    <p>Pick a chapter, lecture, or problem sheet from the sidebar.</p>
+    <p>Run <code>/teach &lt;subject&gt; &lt;chapter&gt;</code> in Claude Code to add new chapters, or <code>/practice &lt;subject&gt; &lt;sheet&gt;</code> to work a problem sheet.</p>
+  </article>
+</main>
+</body>
+</html>

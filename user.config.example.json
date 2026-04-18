@@ -1,0 +1,10 @@
+{
+  "name": "Your Name",
+  "email": "you@imperial.ac.uk",
+  "preferences": {
+    "hint_style": "progressive",
+    "reveal_solution_immediately": false,
+    "teach_mode": "full",
+    "web_port": 8787
+  }
+}

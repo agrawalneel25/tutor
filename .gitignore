@@ -1,22 +1,37 @@
-# Python-generated files
+# Python / uv
+.venv/
+.python-version
 __pycache__/
 *.py[oc]
+*.egg-info/
 build/
 dist/
 wheels/
-*.egg-info
-
-# Virtual environments
-.venv
-.python-version
-
-# Auth — never commit cookies
-auth_state/
-
-# Lecture material — personal, keep local
-subjects/*/lectures/
-subjects/*/materials/
-!subjects/*/last-done.md
-
-.DS_Store
 .pytest_cache/
+.ruff_cache/
+
+# Per-user config + auth
+user.config.json
+auth_state/
+.mcp.json
+
+# Personal study content: never committed
+subjects/*/lectures/
+subjects/*/chapters/
+subjects/*/materials/
+subjects/*/sheets/
+subjects/*/last-done.md
+subjects/*/.progress.json
+
+# Generated caches
+.claude/knowledge/lecture-map.json
+.claude/knowledge/lecture-map.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp

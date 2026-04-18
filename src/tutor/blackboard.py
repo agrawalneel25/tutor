@@ -1,16 +1,16 @@
 """Blackboard client for Imperial.
 
 Reality check (2026-04-17): Imperial's JMC courses are "Ultra-wrapped Learn
-Original" — Ultra navigation shell around classic Learn Original content.
+Original"  -  Ultra navigation shell around classic Learn Original content.
 The `/learn/api/` REST endpoints only expose the Ultra shell (Homepage,
 Reading List) and give 403 on children; the real material lives at
 `/webapps/blackboard/content/listContent.jsp` and must be scraped.
 
 This module:
-- `list_courses()`          — REST works, cookie-authenticated.
-- `list_roots(course_id)`   — REST top-level items (Homepage + Reading List).
-- `scrape(course_id, content_id)` — recursively walks Learn Original folder pages.
-- `download_folder_files()` — grabs every `/bbcswebdav/...` attachment in a subtree.
+- `list_courses()`           -  REST works, cookie-authenticated.
+- `list_roots(course_id)`    -  REST top-level items (Homepage + Reading List).
+- `scrape(course_id, content_id)`  -  recursively walks Learn Original folder pages.
+- `download_folder_files()`  -  grabs every `/bbcswebdav/...` attachment in a subtree.
 """
 from __future__ import annotations
 from dataclasses import dataclass, field
@@ -21,14 +21,7 @@ import httpx
 from bs4 import BeautifulSoup
 
 from .auth import cookies_for_httpx
-from .config import BLACKBOARD_HOST, BLACKBOARD_STATE
-
-
-# Only these cookies belong in requests; full Azure AD jar overflows nginx.
-_BB_COOKIE_ALLOWLIST = {
-    "BbRouter", "JSESSIONID", "AWSELB", "AWSELBCORS",
-    "shib_idp_session", "samlCookie", "SSOCOOKIEPULLED", "s_session_id",
-}
+from .config import BLACKBOARD_HOST, BLACKBOARD_STATE, BB_COOKIE_ALLOWLIST
 
 
 @dataclass
@@ -50,7 +43,7 @@ class Item:
 
 def _client() -> httpx.Client:
     all_cookies = cookies_for_httpx(BLACKBOARD_STATE)
-    cookies = {k: v for k, v in all_cookies.items() if k in _BB_COOKIE_ALLOWLIST}
+    cookies = {k: v for k, v in all_cookies.items() if k in BB_COOKIE_ALLOWLIST}
     return httpx.Client(
         base_url=BLACKBOARD_HOST,
         cookies=cookies,

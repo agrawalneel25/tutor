@@ -1,4 +1,4 @@
-"""uni CLI — fetch lecture material from Panopto/Blackboard, set up folders for catchup."""
+"""tutor CLI: fetch lecture material from Panopto/Blackboard, set up folders for catchup."""
 from __future__ import annotations
 import json
 import re
@@ -13,7 +13,10 @@ from rich.console import Console
 from . import auth as auth_mod
 from . import panopto as pp
 from . import blackboard as bb
-from .config import SUBJECTS, SUBJECTS_DIR, PANOPTO_STATE, BLACKBOARD_STATE
+from . import doctor as doctor_mod
+from . import init as init_mod
+from . import status as status_mod
+from .config import SUBJECT_SLUGS, SUBJECTS, SUBJECTS_DIR, PANOPTO_STATE, BLACKBOARD_STATE
 
 app = typer.Typer(help="Imperial lecture catchup helper.", no_args_is_help=True)
 auth_app = typer.Typer(help="SSO login flows.")
@@ -31,9 +34,39 @@ def _slug(s: str) -> str:
 
 
 def _subject_dir(subject: str) -> Path:
-    if subject not in SUBJECTS:
-        raise typer.BadParameter(f"subject must be one of {SUBJECTS}")
+    if subject not in SUBJECT_SLUGS:
+        raise typer.BadParameter(f"subject must be one of {SUBJECT_SLUGS}")
     return SUBJECTS_DIR / subject
+
+
+# ---------- top-level ----------
+@app.command("init")
+def cmd_init() -> None:
+    """Interactive first-time setup. Safe to re-run."""
+    init_mod.run()
+
+
+@app.command("doctor")
+def cmd_doctor() -> None:
+    """Verify every endpoint + dependency. Exit 1 if anything red."""
+    ok = doctor_mod.run_all()
+    raise typer.Exit(0 if ok else 1)
+
+
+@app.command("status")
+def cmd_status() -> None:
+    """Dashboard: what's done, what's pending, what to do next."""
+    status_mod.run()
+
+
+@app.command("web")
+def cmd_web(
+    port: Optional[int] = typer.Option(None, "--port"),
+    no_open: bool = typer.Option(False, "--no-open", help="Don't auto-open browser."),
+) -> None:
+    """Serve the local notes/problem-sheet UI at http://localhost:<port>."""
+    from . import web as web_mod
+    web_mod.run(port=port, open_browser=not no_open)
 
 
 # ---------- auth ----------
@@ -78,13 +111,19 @@ def cmd_pp_folders(
 
 
 @panopto_app.command("list")
-def cmd_pp_list(folder: str = typer.Argument(..., help="Folder URL or GUID")) -> None:
-    """List sessions in a Panopto folder."""
-    fid = pp.parse_folder_id(folder)
+def cmd_pp_list(folder: str = typer.Argument(..., help="Folder URL, GUID, or subject slug")) -> None:
+    """List sessions in a Panopto folder. Accepts a subject slug as a shortcut."""
+    if folder in SUBJECT_SLUGS:
+        fid = SUBJECTS[folder].panopto_folder
+        if not fid:
+            raise typer.BadParameter(f"No Panopto folder configured for {folder}")
+    else:
+        fid = pp.parse_folder_id(folder)
     sessions = pp.list_sessions(fid)
-    t = Table("DeliveryID", "Title", "Duration (min)", "Start")
-    for s in sessions:
-        t.add_row(s.delivery_id, s.name, f"{s.duration_s/60:.1f}", s.start_time[:19] if s.start_time else "")
+    t = Table("#", "DeliveryID", "Title", "Duration (min)", "Start")
+    for i, s in enumerate(sorted(sessions, key=lambda s: s.start_time), start=1):
+        t.add_row(str(i), s.delivery_id, s.name, f"{s.duration_s/60:.1f}",
+                  s.start_time[:19] if s.start_time else "")
     console.print(t)
 
 
@@ -157,11 +196,50 @@ def cmd_bb_pull(
     """Download every file attachment under a Blackboard content item."""
     out = _subject_dir(subject) / "materials" / _slug(name)
     written = bb.download_folder_files(course_id, content_id, out, recursive=recursive)
-    print(f"[green]Done[/] — {len(written)} files into {out}")
+    print(f"[green]Done[/]  -  {len(written)} files into {out}")
     for p in written[:20]:
         print(f"  ✓ {p.relative_to(_subject_dir(subject))}")
     if len(written) > 20:
         print(f"  ... and {len(written)-20} more")
+
+
+@bb_app.command("sheets")
+def cmd_bb_sheets(
+    subject: str,
+    resolve: bool = typer.Option(False, "--resolve", help="Rescan homepage to discover the Problem Sheets folder."),
+) -> None:
+    """Fetch all problem sheets for a subject into subjects/{subject}/sheets/."""
+    if subject not in SUBJECT_SLUGS:
+        raise typer.BadParameter(f"subject must be one of {SUBJECT_SLUGS}")
+    meta = SUBJECTS[subject]
+    if not meta.bb_course:
+        raise typer.BadParameter(f"No Blackboard course configured for {subject}")
+
+    cid = meta.bb_problem_sheets
+    if resolve or not cid:
+        # Walk the homepage looking for a folder titled like "Problem Sheet*"
+        if not meta.bb_homepage:
+            raise typer.BadParameter(
+                f"No homepage configured for {subject}. "
+                f"Run `tutor bb roots {meta.bb_course}` to find one."
+            )
+        items = bb.list_classic(meta.bb_course, meta.bb_homepage)
+        match = next((i for i in items if i.is_folder and "problem" in i.title.lower()), None)
+        if not match:
+            print(f"[red]Could not find a Problem Sheets folder[/] under {meta.bb_homepage}.")
+            print("Folders on the homepage:")
+            for it in items:
+                if it.is_folder:
+                    print(f"  {it.content_id}  {it.title}")
+            raise typer.Exit(1)
+        cid = match.content_id
+        print(f"[dim]Resolved problem-sheets folder:[/] {cid}  -  {match.title}")
+
+    out = _subject_dir(subject) / "sheets"
+    written = bb.download_folder_files(meta.bb_course, cid, out, recursive=True)
+    print(f"[green]Done[/]  -  {len(written)} files into {out}")
+    for p in written:
+        print(f"  ✓ {p.relative_to(_subject_dir(subject))}")
 
 
 def main() -> None:

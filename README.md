@@ -1,42 +1,44 @@
-# uni
+# tutor
 
-Imperial lecture catchup system. Pull transcripts from Panopto + slides from Blackboard, then run two Claude subagents over them: `lecturer` (teach-mode) and `note-taker` (dense revision notes).
+A Claude Code study app for Imperial JMC Year 1. Clone it, open Claude Code, run `/setup`, then catch up on lectures and problem sheets with AI-guided teaching.
 
-## Setup
+## Get started
 
-```bash
-uv sync
-uv run playwright install chromium
-uv run uni auth all          # one-time headful SSO login to Panopto + Blackboard
-```
+1. Install [uv](https://docs.astral.sh/uv/) and [Claude Code](https://docs.claude.com/en/docs/claude-code).
+2. Clone this repo and open it in Claude Code:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/tutor.git
+   cd tutor
+   claude
+   ```
+3. Inside Claude Code, type:
+   ```
+   /setup
+   ```
 
-## Fetch a lecture
+That is all. Claude Code walks you through everything: dependencies, Imperial SSO login, preferences, and a health check. Then type `/study` to see your dashboard, or `/teach analysis 1` to start learning.
 
-```bash
-# find the Panopto folder GUID for your subject (shown in URL when browsing)
-uv run uni panopto folders
-uv run uni panopto list "https://imperial.cloud.panopto.eu/Panopto/Pages/Sessions/List.aspx?folderID=<GUID>"
+## What it does
 
-# download transcript into subjects/analysis/lectures/L12-.../
-uv run uni panopto fetch analysis <deliveryId> --n 12 --title "Uniform continuity"
-```
+Pulls Panopto transcripts and Blackboard materials for your JMC modules, turns each lecture or chapter into a rigorous teach.md plus dense revision notes.md, and fans problem sheets into per-question walkthroughs with graduated hints. A local web viewer renders everything with proper math typesetting.
 
-## Teach + notes
+## Slash commands
 
-Open this repo in Claude Code and ask:
+| Command | Use |
+| --- | --- |
+| `/setup` | First-time setup wizard |
+| `/doctor` | Health check for every endpoint and dependency |
+| `/study` | Dashboard showing progress and the next best action |
+| `/teach <subject> <chapter-or-lecture>` | Learn new material |
+| `/practice <subject> <sheet>` | Work a problem sheet question by question |
+| `/hint` | Next hint on the active problem |
+| `/check <your attempt>` | Mark your attempt against the canonical solution |
+| `/skip` | Skip the current problem and advance |
 
-> Run `lecturer` on `subjects/analysis/lectures/L12-uniform-continuity`, then `note-taker` on the same folder.
+## Scope
 
-Outputs: `teach.md`, `notes.md` in the lecture folder. `last-done.md` updated automatically.
+Built for the MATH40002 (Analysis), MATH40004 (Calculus), and MATH40012 (Linear Algebra and Groups) modules in the Imperial JMC Year 1 2025/26 cohort. The Panopto folder GUIDs and Blackboard course IDs are hardcoded because they are the same for every student. CS modules (COMP40008/40009/40018) are out of scope because those materials live on CATE.
 
-## Blackboard
+## Privacy
 
-```bash
-uv run uni bb courses                           # list enrolled courses
-uv run uni bb tree <courseId>                   # inspect content tree
-uv run uni bb pull analysis <courseId> <contentId> --name week-5-slides
-```
-
-## Design
-
-See `.claude/PRIMER.md`.
+Your Imperial SSO cookies live in `auth_state/` and are gitignored. Your preferences in `user.config.json` are gitignored. All fetched lectures, notes, and sheets under `subjects/` are gitignored. Nothing personal ever leaves your machine.

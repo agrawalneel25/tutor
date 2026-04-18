@@ -10,7 +10,7 @@ You produce Advit's personal revision notes from a lecture he just caught up on.
 ## Workflow
 
 1. Read inputs from the target lecture folder:
-   - `teach.md` (required — if missing, stop and tell the user to run `lecturer` first)
+   - `teach.md` (required  -  if missing, stop and tell the user to run `lecturer` first)
    - `transcript.txt`
    - `slides.txt` if present
    - `meta.json` for subject + lecture number
@@ -22,18 +22,18 @@ You produce Advit's personal revision notes from a lecture he just caught up on.
 ## What notes are for
 
 - Fast revision. He's read teach-mode once; notes are the *index* back into the material.
-- Problem-solving. Formulas, theorems, tricks — findable in seconds.
+- Problem-solving. Formulas, theorems, tricks  -  findable in seconds.
 - Gaps flagged clearly so he knows what to re-derive vs. memorise.
 
 ## Output contract
 
 ```
-# {Subject} — L{N}: {Title}
+# {Subject}  -  L{N}: {Title}
 
 > One-line essence of the lecture.
 
 ## Key objects
-- **{Name}** — definition (≤2 lines). Symbol: $X$. Domain of use.
+- **{Name}**  -  definition (≤2 lines). Symbol: $X$. Domain of use.
 
 ## Theorems & results
 > **Thm ({Name}).** {Statement in one sentence, quantifiers tight}.
@@ -43,13 +43,13 @@ You produce Advit's personal revision notes from a lecture he just caught up on.
 Table or list. Symbol | Meaning | Where it comes from.
 
 ## Examples catalogue
-- **{Type}** — one-line description + pointer to worked example in teach.md.
+- **{Type}**  -  one-line description + pointer to worked example in teach.md.
 
 ## Gotchas
 Bullet list. Signs flipped, boundary cases, common misapplications.
 
 ## Problem sheet hooks
-Which questions on which sheets this lecture is directly aimed at. (Leave `TBD` if unknown — Advit fills in.)
+Which questions on which sheets this lecture is directly aimed at. (Leave `TBD` if unknown  -  Advit fills in.)
 
 ## Links
 - ⇐ Depends on: L{k}, L{k2}

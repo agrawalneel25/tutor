@@ -1,76 +1,84 @@
-# `uni` — Imperial Catchup System
+# tutor  -  Claude's primer
 
-Personal tool for catching up on missed lectures. Finals 2026-04-27 → 2026-05-08.
+Imperial JMC Year 1 catchup system. Claude, read this first.
 
-## What this does
+## What this repo does
 
-For a given lecture:
-1. **Fetch** transcript (Panopto) + slides (Blackboard) via saved SSO cookies.
-2. **Teach** — an Opus subagent reconstructs the lecture as rigorous Imperial-grade teaching material (`teach.md`).
-3. **Note** — a Sonnet subagent distills teach output into dense revision notes (`notes.md`).
+Pulls lecture transcripts (Panopto) + course materials (Blackboard), runs two
+subagents per lecture or chapter  -  `lecturer` (Opus, rigorous teach-mode) and
+`note-taker` (Sonnet, dense revision notes)  -  and serves the result as a local
+web UI with problem-sheet practice mode.
 
-Target: compress 1hr of lecture into ~15min of active reading.
+Goal: compress 60 min of lecture into 15 min of active reading, then reinforce
+via problem sheets.
 
-## Architecture
+## Architecture (at a glance)
 
-- `src/uni/auth.py` — Playwright headful SSO once, persists `auth_state/{panopto,blackboard}.json`.
-- `src/uni/panopto.py` — `httpx` against `Data.svc/GetSessions`, `GenerateSRT.ashx`. No OAuth.
-- `src/uni/blackboard.py` — `httpx` against `/learn/api/public/v1/*`. No OAuth.
-- `src/uni/cli.py` — Typer CLI: `uni auth`, `uni panopto`, `uni bb`.
-- `.claude/agents/{lecturer,note-taker}.md` — subagent defs with the full teach/notes contracts inline.
-- `subjects/{analysis,calculus,linear-algebra}/` — per-subject workspaces.
+| Layer            | Where                              | Purpose                                              |
+|------------------|------------------------------------|------------------------------------------------------|
+| Auth             | `src/tutor/auth.py`                  | Playwright headful SSO once; `auth_state/*.json`.    |
+| Panopto client   | `src/tutor/panopto.py`               | `httpx` against `Data.svc` + `GenerateSRT.ashx`.     |
+| Blackboard       | `src/tutor/blackboard.py`            | `httpx` against REST + `listContent.jsp` scraping.   |
+| Shared constants | `src/tutor/shared.py`                | JMC-common Panopto GUIDs + BB course IDs.            |
+| Runtime config   | `src/tutor/config.py`                | Loads shared + per-user `user.config.json`.          |
+| CLI              | `src/tutor/cli.py`                   | Typer entrypoint: `uv run tutor …`.                    |
+| Doctor           | `src/tutor/doctor.py`                | Full endpoint + deps health check.                   |
+| Init wizard      | `src/tutor/init.py`                  | `uv run tutor init`.                                   |
+| Web UI           | `src/tutor/web.py` + `webui/`        | FastAPI at localhost, notes + problem-sheet viewer.  |
+| Problems         | `src/tutor/problems.py`              | Problem-sheet extraction + progress tracking.        |
+| Agents           | `.claude/agents/*.md`              | `lecturer`, `note-taker`, `problem-solver`.          |
+| Slash commands   | `.claude/commands/*.md`            | `/setup`, `/doctor`, `/teach`, `/practice`, …        |
+| Knowledge        | `.claude/knowledge/*.md`           | JMC-common IDs + course context (no personal data).  |
 
-## Typical workflow
+## Personal vs shared
+
+**Shared (committed, same for every JMC Y1):** Panopto folder GUIDs, BB course
+IDs, Learn Original content IDs under the Analysis course. All in
+`src/tutor/shared.py` and `.claude/knowledge/known-ids.md`.
+
+**Per-user (never committed):** `user.config.json` (name, preferences),
+`auth_state/*.json` (SSO cookies), `subjects/*/lectures`, `subjects/*/chapters`,
+`subjects/*/materials`, `subjects/*/sheets`, `.claude/knowledge/lecture-map.json`.
+All gitignored.
+
+## Typical usage
+
+```bash
+uv run tutor init                          # first time only
+uv run tutor doctor                        # verify everything works
+uv run tutor panopto list analysis         # list all Analysis sessions
+uv run tutor panopto fetch analysis <id> --n 14 --title "MVT"
+uv run tutor bb sheets analysis --resolve  # grab every problem sheet
+uv run tutor web                           # open the local reader
+```
+
+In Claude Code:
 
 ```
-# 1. One-time (or when cookies expire)
-uv run uni auth all
-
-# 2. Discover a Panopto folder for the subject
-uv run uni panopto folders                     # root folders
-uv run uni panopto list "<folder-url-or-id>"   # sessions in it
-
-# 3. Fetch a specific lecture
-uv run uni panopto fetch analysis <deliveryId> --n 12 --title "Uniform continuity"
-
-# 4. In Claude Code, in this repo:
-#    > Run lecturer on subjects/analysis/lectures/L12-*
-#    > Then note-taker on the same folder
+/teach analysis 14         # fetch if missing, then lecturer + note-taker
+/practice analysis sheet-3 # start problem-by-problem walkthrough
+/hint                      # next hint level on current problem
+/check                     # submit your attempt for feedback
 ```
 
 ## Conventions
 
-- Lecture folder: `subjects/{subject}/lectures/L{NN}-{slug}/`
-  - `transcript.srt`, `transcript.txt`, `meta.json`, `slides.pdf` (opt), `teach.md`, `notes.md`.
-- `subjects/{subject}/last-done.md` — append-only log, updated by note-taker.
-- Never commit `auth_state/` or lecture material (personal, gitignored).
+- **Lecture folder:** `subjects/<subject>/lectures/L{NN}-{slug}/` with
+  `transcript.srt`, `transcript.txt`, `meta.json`, optionally `slides.pdf`,
+  then `teach.md` + `notes.md` after agents run.
+- **Chapter folder:** `subjects/<subject>/chapters/ch{NN}-{slug}/`  -  same
+  pair of outputs, sourced from PDF instead of transcript.
+- **Problem sheet:** `subjects/<subject>/sheets/<sheet-slug>/` with the PDF,
+  `problems/qNN.md` per question, `.progress.json` tracking state.
 
 ## Auth freshness
 
-Imperial SSO cookies typically last weeks but can expire mid-session. If an `httpx` call 302s to login, run `uv run uni auth panopto` (or `blackboard`) again.
+Imperial SSO cookies last weeks but can expire mid-session. Symptom: `tutor
+doctor` shows HTTP 401. Fix: `uv run tutor auth <panopto|blackboard>`.
 
-## Known IDs
+## When things break
 
-**Always read `.claude/knowledge/known-ids.md` before scraping.** It has the Panopto folder GUIDs + Blackboard course IDs for all three subjects — don't re-run `uni panopto folders` or `uni bb courses` unless IDs look stale.
-
-## MCP
-
-- `notion-query` (http, worker URL in `.mcp.json`) — read the missed-lectures queue.
-  - Database ID + schema + canonical queries are in `.claude/knowledge/known-ids.md`.
-  - After finishing notes on a lecture, mark its Notion row `Status: Done` via `mcp__notion-query__update_page`.
-
-## Catchup loop (what a typical session looks like)
-
-1. Query Notion for `Type=Lecture, Status≠Done`, optionally filtered by `Module`.
-2. For each missed lecture, resolve its Panopto session:
-   - Look up the subject's Panopto folder ID in `known-ids.md`.
-   - `uv run uni panopto list <folder-id>` — find the session matching lecture N (usually by index/date).
-3. `uv run uni panopto fetch <subject> <deliveryId> --n <N> --title "..."` — pulls transcript.
-4. Run `lecturer` subagent on the lecture folder → `teach.md`.
-5. Run `note-taker` subagent → `notes.md` + appends to `subjects/{subject}/last-done.md`.
-6. Update the Notion row `Status = Done`.
-
-## Known unknowns
-
-- Caption availability varies per lecture — older sessions may have no transcript; the client raises a clear error if the SRT body is empty.
-- OAuth client registration (both platforms) is a future option if scraping breaks.
+Always run `uv run tutor doctor` first. Each failing check tells you the exact
+next command. If the BB HTML parser returns 0 items on a known homepage,
+Blackboard has likely redesigned  -  check `blackboard.py:_parse_folder_page`
+against a fresh page dump.
