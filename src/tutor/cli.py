@@ -21,9 +21,10 @@ from . import doctor as doctor_mod
 from . import init as init_mod
 from . import status as status_mod
 from . import course_map as cm
+from . import exams_scraper
 from .config import (
     SUBJECT_SLUGS, SUBJECTS, SUBJECTS_DIR,
-    PANOPTO_STATE, BLACKBOARD_STATE,
+    PANOPTO_STATE, BLACKBOARD_STATE, EXAMS_STATE,
     UserConfig, USER_CONFIG_PATH,
     TERMS, EXAMS, COURSE_MAP_JSON,
 )
@@ -33,10 +34,12 @@ auth_app = typer.Typer(help="SSO login flows.")
 panopto_app = typer.Typer(help="Panopto operations.")
 bb_app = typer.Typer(help="Blackboard operations.")
 map_app = typer.Typer(help="Course map: index of lectures, chapters, exam dates.")
+papers_app = typer.Typer(help="Past exam papers from exams.doc.ic.ac.uk.")
 app.add_typer(auth_app, name="auth")
 app.add_typer(panopto_app, name="panopto")
 app.add_typer(bb_app, name="bb")
 app.add_typer(map_app, name="map")
+app.add_typer(papers_app, name="papers")
 
 console = Console()
 
@@ -92,7 +95,7 @@ def cmd_prepare(
     for slug in SUBJECTS:
         for sub in ("chapters", "lectures", "materials", "sheets"):
             (SUBJECTS_DIR / slug / sub).mkdir(parents=True, exist_ok=True)
-    print(f"[green]✓[/] scaffolded {len(SUBJECTS)} subject folders under {SUBJECTS_DIR.relative_to(SUBJECTS_DIR.parent)}/")
+    print(f"[green]OK[/] scaffolded {len(SUBJECTS)} subject folders under {SUBJECTS_DIR.relative_to(SUBJECTS_DIR.parent)}/")
 
     # 3. Default config (don't overwrite)
     if USER_CONFIG_PATH.exists():
@@ -102,7 +105,7 @@ def cmd_prepare(
         cfg = UserConfig()
         cfg.name = resolved_name
         cfg.save()
-        print(f"[green]✓[/] wrote {USER_CONFIG_PATH.name} (name={resolved_name!r}; edit to customise)")
+        print(f"[green]OK[/] wrote {USER_CONFIG_PATH.name} (name={resolved_name!r}; edit to customise)")
 
 
 def _detect_git_name() -> Optional[str]:
@@ -144,14 +147,24 @@ def cmd_auth_blackboard() -> None:
 
 @auth_app.command("all")
 def cmd_auth_all() -> None:
-    """Unified Imperial SSO  -  one browser login, cookies for both hosts."""
+    """Unified Imperial SSO  -  one browser login, cookies for all hosts."""
     auth_mod.login_all()
+
+
+@auth_app.command("exams")
+def cmd_auth_exams(
+    username: str = typer.Option(..., "--username", "-u", prompt="Imperial shortcode (e.g. na1025)"),
+    password: str = typer.Option(..., "--password", "-p", prompt=True, hide_input=True),
+) -> None:
+    """Headful login to exams.doc.ic.ac.uk (HTTP Basic Auth + Imperial shortcode)."""
+    auth_mod.login_exams(username=username, password=password)
 
 
 @auth_app.command("status")
 def cmd_auth_status() -> None:
     print(f"panopto cookies: {'[green]yes[/]' if PANOPTO_STATE.exists() else '[red]missing[/]'}  ({PANOPTO_STATE})")
     print(f"blackboard cookies: {'[green]yes[/]' if BLACKBOARD_STATE.exists() else '[red]missing[/]'}  ({BLACKBOARD_STATE})")
+    print(f"exams cookies: {'[green]yes[/]' if EXAMS_STATE.exists() else '[red]missing[/]'}  ({EXAMS_STATE})")
 
 
 # ---------- panopto ----------
@@ -258,7 +271,7 @@ def cmd_bb_pull(
     written = bb.download_folder_files(course_id, content_id, out, recursive=recursive)
     print(f"[green]Done[/]  -  {len(written)} files into {out}")
     for p in written[:20]:
-        print(f"  ✓ {p.relative_to(_subject_dir(subject))}")
+        print(f"  OK{p.relative_to(_subject_dir(subject))}")
     if len(written) > 20:
         print(f"  ... and {len(written)-20} more")
 
@@ -299,7 +312,7 @@ def cmd_bb_sheets(
     written = bb.download_folder_files(meta.bb_course, cid, out, recursive=True)
     print(f"[green]Done[/]  -  {len(written)} files into {out}")
     for p in written:
-        print(f"  ✓ {p.relative_to(_subject_dir(subject))}")
+        print(f"  OK{p.relative_to(_subject_dir(subject))}")
 
 
 # ---------- map ----------
@@ -328,7 +341,7 @@ def cmd_map_build(
         for sb in course_map.subjects.values()
         for tb in sb.terms.values()
     )
-    print(f"[green]✓[/] indexed {total_l} lectures across "
+    print(f"[green]OK[/] indexed {total_l} lectures across "
           f"{len(course_map.subjects)} subject(s).")
 
     if dry_run:
@@ -336,7 +349,7 @@ def cmd_map_build(
         return
 
     course_map.save()
-    print(f"[green]✓[/] wrote {COURSE_MAP_JSON.relative_to(COURSE_MAP_JSON.parents[2])}")
+    print(f"[green]OK[/] wrote {COURSE_MAP_JSON.relative_to(COURSE_MAP_JSON.parents[2])}")
 
 
 @map_app.command("show")
@@ -447,6 +460,23 @@ def cmd_exams() -> None:
             cell = f"[green]{days}d[/]"
         t.add_row(f"{meta.title}\n[dim]{meta.code}[/]", d.isoformat(), cell)
     console.print(t)
+
+
+# ---------- papers ----------
+@papers_app.command("fetch")
+def cmd_papers_fetch(
+    module: str = typer.Argument(..., help="Module code e.g. COMP40006"),
+    out: Optional[str] = typer.Option(None, "--out", "-o", help="Output directory (default: subjects/<module>/past-papers)"),
+) -> None:
+    """Download past papers for a module from exams.doc.ic.ac.uk."""
+    out_path = Path(out) if out else None
+    saved = exams_scraper.fetch_papers(module.upper(), out_path)
+    if saved:
+        print(f"[green]{len(saved)} paper(s) saved.[/]")
+        for p in saved:
+            print(f"  {p}")
+    else:
+        print("[yellow]No papers downloaded. Try: tutor auth exams[/]")
 
 
 def main() -> None:
