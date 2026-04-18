@@ -1,29 +1,46 @@
 ---
-description: First-time setup. One command to install deps, log into Imperial, configure preferences, and verify health.
+description: First-time setup. Fully autonomous - deps, Playwright, config, Imperial SSO, health check.
 ---
 
-You are guiding a new user through first-time setup of the `tutor` study app. Execute in order; stop and fix before proceeding if any step fails.
+You are running the `tutor` first-time setup **autonomously**. Do not ask the user for permission before each step. Do not offer to run commands yourself and wait. Just run them. The user launched Claude Code with `--dangerously-skip-permissions` specifically so you can drive the whole flow.
 
-1. **Check `uv`.** Run `uv --version`. If missing, tell them: `curl -LsSf https://astral.sh/uv/install.sh | sh` and stop.
+Pause only when the user must physically act (SSO login in a browser). Keep output tight: a one-line progress note per step is enough.
 
-2. **Sync deps.** Run `uv sync`. This should be fast (pulls from the lock file).
+## Steps
 
-3. **Launch the interactive wizard.** Run `uv run tutor init`. This is blocking and interactive  -  **let it take over the terminal**. Do not pipe it. The wizard handles: Playwright chromium install, preferences prompts (name, hint style, teach depth), two Imperial SSO login flows (Panopto + Blackboard, headful browser), and a final health check.
+1. **Check uv.** Run `uv --version`. If missing, tell the user to run `curl -LsSf https://astral.sh/uv/install.sh | sh` then re-run `/setup`, and stop.
 
-4. **If the wizard reports green**, celebrate briefly and give the user their single best next action:
+2. **Sync deps.** Run `uv sync`.
 
-   ```
-   You're set. Try:
+3. **Prepare.** Run `uv run tutor prepare`. This installs Playwright chromium, scaffolds subject folders, and writes `user.config.json` (auto-detecting name from git config, defaulting to "Student"). Allow up to 3 minutes (chromium download).
 
-   /study                       ← see your dashboard
-   /teach analysis 1            ← learn chapter 1 of Analysis
-   /practice analysis sheet-1   ← work a problem sheet
+4. **Panopto SSO.** If `auth_state/panopto.json` is missing, tell the user: *"A browser window will open. Log in with your Imperial account  -  I'll wait."* Then run `uv run tutor auth panopto` with a long timeout (pass `timeout: 600000` to Bash — 10 min). The command exits once the user lands back on the Panopto home page. If the file already exists, skip this step.
 
-   Or open the web reader: uv run tutor web
-   ```
+5. **Blackboard SSO.** Same pattern with `uv run tutor auth blackboard` if `auth_state/blackboard.json` is missing.
 
-5. **If any check is red**, name the failing row + the exact fix (e.g. `uv run tutor auth blackboard` for a 401). Don't read the output back verbatim  -  summarise.
+6. **Health check.** Run `uv run tutor doctor`.
 
-Keep output tight. The user wants to start studying, not read a setup story.
+7. **Outcome:**
+
+   - **All green:** reply with exactly:
+
+     ```
+     Setup complete. Try:
+
+     /study                       dashboard
+     /teach analysis 1            first chapter
+     /practice analysis sheet-1   first problem sheet
+
+     Or open the local reader: uv run tutor web
+     ```
+
+   - **Red rows:** summarise which checks failed and the exact fix the doctor output suggests. If a 401 appears on Panopto/Blackboard, re-run the matching `uv run tutor auth ...` once.
+
+## Rules
+
+- Do not narrate what you are about to do. Just do it and report one line.
+- Do not ask "should I run X?" — run X.
+- Do not pipe interactive commands. `tutor auth panopto` and `tutor auth blackboard` are blocking and need the terminal.
+- Do not re-prompt the user for their name, hint style, or teach depth. `prepare` writes sensible defaults. The user can edit `user.config.json` later.
 
 End with: `Next: /study`.

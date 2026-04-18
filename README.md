@@ -7,16 +7,16 @@ A Claude Code study app for Imperial JMC Year 1. Clone it, open Claude Code, run
 1. Install [uv](https://docs.astral.sh/uv/) and [Claude Code](https://docs.claude.com/en/docs/claude-code).
 2. Clone this repo and open it in Claude Code:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/tutor.git
+   git clone https://github.com/advitrocks9/tutor.git
    cd tutor
-   claude
+   claude --dangerously-skip-permissions
    ```
 3. Inside Claude Code, type:
    ```
    /setup
    ```
 
-That is all. Claude Code walks you through everything: dependencies, Imperial SSO login, preferences, and a health check. Then type `/study` to see your dashboard, or `/teach analysis 1` to start learning.
+That is all. Claude Code runs the whole setup autonomously: dependencies, Playwright, config, Imperial SSO logins (two headful browser pops where you just log in), and a health check. Then type `/study` to see your dashboard, or `/teach analysis 1` to start learning.
 
 ## What it does
 

@@ -2,6 +2,9 @@
 from __future__ import annotations
 import json
 import re
+import shutil
+import subprocess
+import sys
 from pathlib import Path
 from typing import Optional
 
@@ -16,7 +19,11 @@ from . import blackboard as bb
 from . import doctor as doctor_mod
 from . import init as init_mod
 from . import status as status_mod
-from .config import SUBJECT_SLUGS, SUBJECTS, SUBJECTS_DIR, PANOPTO_STATE, BLACKBOARD_STATE
+from .config import (
+    SUBJECT_SLUGS, SUBJECTS, SUBJECTS_DIR,
+    PANOPTO_STATE, BLACKBOARD_STATE,
+    UserConfig, USER_CONFIG_PATH,
+)
 
 app = typer.Typer(help="Imperial lecture catchup helper.", no_args_is_help=True)
 auth_app = typer.Typer(help="SSO login flows.")
@@ -57,6 +64,54 @@ def cmd_doctor() -> None:
 def cmd_status() -> None:
     """Dashboard: what's done, what's pending, what to do next."""
     status_mod.run()
+
+
+@app.command("prepare")
+def cmd_prepare(
+    name: Optional[str] = typer.Option(None, "--name", help="Override auto-detected name."),
+    skip_playwright: bool = typer.Option(False, "--skip-playwright", help="Skip chromium install."),
+) -> None:
+    """Non-interactive prep: install chromium, scaffold dirs, write default user.config.json.
+
+    Safe to re-run. Does NOT overwrite an existing user.config.json.
+    """
+    # 1. Playwright chromium
+    if not skip_playwright:
+        print("[cyan]Installing Playwright chromium...[/]")
+        subprocess.run(
+            [sys.executable, "-m", "playwright", "install", "chromium"],
+            check=False,
+        )
+
+    # 2. Subject dirs
+    for slug in SUBJECTS:
+        for sub in ("chapters", "lectures", "materials", "sheets"):
+            (SUBJECTS_DIR / slug / sub).mkdir(parents=True, exist_ok=True)
+    print(f"[green]✓[/] scaffolded {len(SUBJECTS)} subject folders under {SUBJECTS_DIR.relative_to(SUBJECTS_DIR.parent)}/")
+
+    # 3. Default config (don't overwrite)
+    if USER_CONFIG_PATH.exists():
+        print(f"[dim]user.config.json exists, leaving it alone.[/]")
+    else:
+        resolved_name = name or _detect_git_name() or "Student"
+        cfg = UserConfig()
+        cfg.name = resolved_name
+        cfg.save()
+        print(f"[green]✓[/] wrote {USER_CONFIG_PATH.name} (name={resolved_name!r}; edit to customise)")
+
+
+def _detect_git_name() -> Optional[str]:
+    if not shutil.which("git"):
+        return None
+    try:
+        out = subprocess.run(
+            ["git", "config", "--get", "user.name"],
+            capture_output=True, text=True, check=False, timeout=3,
+        )
+        val = (out.stdout or "").strip()
+        return val or None
+    except Exception:
+        return None
 
 
 @app.command("web")
