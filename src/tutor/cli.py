@@ -5,6 +5,7 @@ import re
 import shutil
 import subprocess
 import sys
+from datetime import date
 from pathlib import Path
 from typing import Optional
 
@@ -19,19 +20,23 @@ from . import blackboard as bb
 from . import doctor as doctor_mod
 from . import init as init_mod
 from . import status as status_mod
+from . import course_map as cm
 from .config import (
     SUBJECT_SLUGS, SUBJECTS, SUBJECTS_DIR,
     PANOPTO_STATE, BLACKBOARD_STATE,
     UserConfig, USER_CONFIG_PATH,
+    TERMS, EXAMS, COURSE_MAP_JSON,
 )
 
 app = typer.Typer(help="Imperial lecture catchup helper.", no_args_is_help=True)
 auth_app = typer.Typer(help="SSO login flows.")
 panopto_app = typer.Typer(help="Panopto operations.")
 bb_app = typer.Typer(help="Blackboard operations.")
+map_app = typer.Typer(help="Course map: index of lectures, chapters, exam dates.")
 app.add_typer(auth_app, name="auth")
 app.add_typer(panopto_app, name="panopto")
 app.add_typer(bb_app, name="bb")
+app.add_typer(map_app, name="map")
 
 console = Console()
 
@@ -139,8 +144,8 @@ def cmd_auth_blackboard() -> None:
 
 @auth_app.command("all")
 def cmd_auth_all() -> None:
-    auth_mod.login_panopto()
-    auth_mod.login_blackboard()
+    """Unified Imperial SSO  -  one browser login, cookies for both hosts."""
+    auth_mod.login_all()
 
 
 @auth_app.command("status")
@@ -295,6 +300,153 @@ def cmd_bb_sheets(
     print(f"[green]Done[/]  -  {len(written)} files into {out}")
     for p in written:
         print(f"  ✓ {p.relative_to(_subject_dir(subject))}")
+
+
+# ---------- map ----------
+@map_app.command("build")
+def cmd_map_build(
+    subject: Optional[str] = typer.Option(
+        None, "--subject", "-s",
+        help="Build just this subject. Default: all three.",
+    ),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Print summary, don't write."),
+) -> None:
+    """Scrape Panopto + inventory materials, write .claude/knowledge/course-map.{json,md}.
+
+    This is the index agents consult on /teach. Idempotent. Safe to rerun after
+    new lectures land or you pull fresh materials with `tutor bb pull`.
+    """
+    slugs = [subject] if subject else None
+    if subject and subject not in SUBJECT_SLUGS:
+        raise typer.BadParameter(f"subject must be one of {SUBJECT_SLUGS}")
+
+    print("[cyan]Building course map...[/]")
+    course_map = cm.build(subjects=slugs)
+
+    total_l = sum(
+        len(tb.lectures)
+        for sb in course_map.subjects.values()
+        for tb in sb.terms.values()
+    )
+    print(f"[green]✓[/] indexed {total_l} lectures across "
+          f"{len(course_map.subjects)} subject(s).")
+
+    if dry_run:
+        print("[dim]--dry-run: no files written.[/]")
+        return
+
+    course_map.save()
+    print(f"[green]✓[/] wrote {COURSE_MAP_JSON.relative_to(COURSE_MAP_JSON.parents[2])}")
+
+
+@map_app.command("show")
+def cmd_map_show(
+    subject: Optional[str] = typer.Argument(None, help="Subject slug (omit = all)."),
+    term: Optional[str] = typer.Option(None, "--term", "-t", help="autumn | spring"),
+) -> None:
+    """Print a condensed view of the course map."""
+    course_map = cm.CourseMap.load()
+    subs = [subject] if subject else list(course_map.subjects.keys())
+    terms = [term] if term else list(TERMS)
+
+    for slug in subs:
+        sb = course_map.subjects.get(slug)
+        if not sb:
+            print(f"[yellow]No entry for {slug}[/]")
+            continue
+        print(f"\n[bold cyan]{sb.title}[/]  [dim]({sb.code})[/]  -  exam {sb.exam_date or '?'}")
+        for t in terms:
+            tb = sb.terms.get(t)
+            if not tb or not tb.lectures:
+                print(f"  [dim]{t}: (no lectures)[/]")
+                continue
+            print(f"  [bold]{t}[/] ({len(tb.lectures)} lectures)")
+            for l in tb.lectures:
+                print(f"    L{l.n:02d}  {l.date}  {l.title[:60]}")
+
+
+@map_app.command("path")
+def cmd_map_path() -> None:
+    """Print where the course map lives on disk."""
+    print(str(COURSE_MAP_JSON))
+
+
+@app.command("resolve")
+def cmd_resolve(
+    subject: str = typer.Argument(..., help="analysis | calculus | linear-algebra"),
+    ref: str = typer.Argument(..., help="Lecture or chapter ref: L14, 14, ch3, or a Panopto viewer URL."),
+    term: Optional[str] = typer.Argument(None, help="autumn | spring (required for L/ch refs)."),
+) -> None:
+    """Look up a lecture or chapter in the course map. Prints delivery_id + viewer URL.
+
+    Pass a Panopto viewer URL as `ref` to short-circuit the lookup.
+    """
+    delivery = cm.parse_viewer_url(ref)
+    if delivery:
+        print(f"[green]delivery_id[/]  {delivery}")
+        print(f"[green]viewer_url[/]   https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id={delivery}")
+        return
+
+    if subject not in SUBJECT_SLUGS:
+        raise typer.BadParameter(f"subject must be one of {SUBJECT_SLUGS}")
+    if term is None or term not in TERMS:
+        raise typer.BadParameter(
+            f"term is required (autumn | spring). Each term restarts lecture numbering at 1."
+        )
+
+    try:
+        kind, n = cm.parse_ref(ref)
+    except ValueError as e:
+        raise typer.BadParameter(str(e))
+
+    try:
+        course_map = cm.CourseMap.load()
+    except FileNotFoundError as e:
+        raise typer.BadParameter(str(e))
+
+    if kind == "lecture":
+        lec = course_map.find_lecture(subject, term, n)
+        if not lec:
+            available = course_map.lectures(subject, term)
+            print(f"[red]No L{n} in {subject}/{term}[/]  -  map has L1..L{len(available)}")
+            raise typer.Exit(1)
+        print(f"[green]delivery_id[/]  {lec.delivery_id}")
+        print(f"[green]viewer_url[/]   {lec.viewer_url}")
+        print(f"[green]title[/]        {lec.title}")
+        print(f"[green]date[/]         {lec.date}  -  {lec.duration_min:.0f} min")
+    else:
+        # Chapters are PDF sections. Scan subjects/<slug>/materials/ at query
+        # time — map is per-cohort (Panopto only) and doesn't track per-user PDFs.
+        pdfs = cm.scan_materials(subject, term=term)
+        if not pdfs:
+            print(f"[yellow]No PDFs in subjects/{subject}/materials/ for {term}.[/]  "
+                  f"Run `uv run tutor bb pull` to fetch them first.")
+            raise typer.Exit(1)
+        for p in pdfs:
+            rel = p.relative_to(Path.cwd()) if p.is_absolute() else p
+            print(f"  {rel}")
+        print(f"[dim]Chapter boundaries live inside the PDFs.[/] "
+              f"Open the PDF, find chapter {n} via bookmarks/TOC, feed pages to lecturer.")
+
+
+@app.command("exams")
+def cmd_exams() -> None:
+    """Days-until countdown for each subject's final exam."""
+    t = Table("Subject", "Date", "Days until", title="Exams")
+    for slug, d, days in cm.exam_countdown():
+        meta = SUBJECTS[slug]
+        if days < 0:
+            cell = f"[dim]{abs(days)}d ago[/]"
+        elif days == 0:
+            cell = "[bold red]TODAY[/]"
+        elif days <= 7:
+            cell = f"[bold red]{days}d[/]"
+        elif days <= 14:
+            cell = f"[yellow]{days}d[/]"
+        else:
+            cell = f"[green]{days}d[/]"
+        t.add_row(f"{meta.title}\n[dim]{meta.code}[/]", d.isoformat(), cell)
+    console.print(t)
 
 
 def main() -> None:

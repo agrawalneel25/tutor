@@ -1,0 +1,1024 @@
+{
+  "academic_year": "2025-26",
+  "generated_at": "2026-04-18T21:09:46+00:00",
+  "exams": {
+    "linear-algebra": "2026-04-29",
+    "analysis": "2026-05-05",
+    "calculus": "2026-05-06"
+  },
+  "subjects": {
+    "analysis": {
+      "code": "MATH40002",
+      "title": "Analysis 1",
+      "exam_date": "2026-05-05",
+      "terms": {
+        "autumn": {
+          "lectures": [
+            {
+              "n": 1,
+              "title": "MA Analysis 1 HXLY-02-213 2025-10-27",
+              "date": "2025-10-27",
+              "delivery_id": "70658dcd-8294-4aa8-a3cb-b33200befa75",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=70658dcd-8294-4aa8-a3cb-b33200befa75",
+              "duration_min": 60.0
+            },
+            {
+              "n": 2,
+              "title": "MA Analysis 1 HXLY-02-213 2025-10-29",
+              "date": "2025-10-29",
+              "delivery_id": "5daec475-90c1-4622-b9a2-b33200be93f3",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5daec475-90c1-4622-b9a2-b33200be93f3",
+              "duration_min": 60.0
+            },
+            {
+              "n": 3,
+              "title": "MA Analysis 1 HXLY-02-213 2025-10-30",
+              "date": "2025-10-30",
+              "delivery_id": "1472def2-3d2a-4716-ba11-b33200be3a21",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1472def2-3d2a-4716-ba11-b33200be3a21",
+              "duration_min": 59.9
+            },
+            {
+              "n": 4,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-03",
+              "date": "2025-11-03",
+              "delivery_id": "373131f2-afc4-4f39-bf1d-b33200befc62",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=373131f2-afc4-4f39-bf1d-b33200befc62",
+              "duration_min": 59.9
+            },
+            {
+              "n": 5,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-05",
+              "date": "2025-11-05",
+              "delivery_id": "4fc58e11-089a-4af2-aec5-b33200be95d7",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4fc58e11-089a-4af2-aec5-b33200be95d7",
+              "duration_min": 60.0
+            },
+            {
+              "n": 6,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-06",
+              "date": "2025-11-06",
+              "delivery_id": "32bd7097-4700-40da-b164-b33200be3be7",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=32bd7097-4700-40da-b164-b33200be3be7",
+              "duration_min": 59.9
+            },
+            {
+              "n": 7,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-10",
+              "date": "2025-11-10",
+              "delivery_id": "5acc4480-a8b2-41f5-871d-b33200befdc6",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5acc4480-a8b2-41f5-871d-b33200befdc6",
+              "duration_min": 59.9
+            },
+            {
+              "n": 8,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-12",
+              "date": "2025-11-12",
+              "delivery_id": "c55757ca-4df9-423b-b110-b33200be979e",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=c55757ca-4df9-423b-b110-b33200be979e",
+              "duration_min": 60.0
+            },
+            {
+              "n": 9,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-13",
+              "date": "2025-11-13",
+              "delivery_id": "c06a2bce-edb9-431f-b8cb-b33200be3d9e",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=c06a2bce-edb9-431f-b8cb-b33200be3d9e",
+              "duration_min": 60.0
+            },
+            {
+              "n": 10,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-17",
+              "date": "2025-11-17",
+              "delivery_id": "165128eb-80f6-4ac1-95e8-b33200beffdd",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=165128eb-80f6-4ac1-95e8-b33200beffdd",
+              "duration_min": 59.9
+            },
+            {
+              "n": 11,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-19",
+              "date": "2025-11-19",
+              "delivery_id": "bd1378b0-3d5f-44d2-b5f6-b33200be9960",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=bd1378b0-3d5f-44d2-b5f6-b33200be9960",
+              "duration_min": 60.0
+            },
+            {
+              "n": 12,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-20",
+              "date": "2025-11-20",
+              "delivery_id": "1765e767-bb9e-4e37-a940-b33200be3f3e",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1765e767-bb9e-4e37-a940-b33200be3f3e",
+              "duration_min": 60.0
+            },
+            {
+              "n": 13,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-24",
+              "date": "2025-11-24",
+              "delivery_id": "387cab90-02f8-44d2-9fea-b33200bf01da",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=387cab90-02f8-44d2-9fea-b33200bf01da",
+              "duration_min": 59.9
+            },
+            {
+              "n": 14,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-26",
+              "date": "2025-11-26",
+              "delivery_id": "32106e60-b136-4428-9edc-b33200be9b5f",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=32106e60-b136-4428-9edc-b33200be9b5f",
+              "duration_min": 59.9
+            },
+            {
+              "n": 15,
+              "title": "MA Analysis 1 HXLY-02-213 2025-11-27",
+              "date": "2025-11-27",
+              "delivery_id": "bf224635-9822-4096-9262-b33200be40f8",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=bf224635-9822-4096-9262-b33200be40f8",
+              "duration_min": 59.9
+            },
+            {
+              "n": 16,
+              "title": "MA Analysis 1 HXLY-02-213 2025-12-01",
+              "date": "2025-12-01",
+              "delivery_id": "c39c8242-9c11-4cc7-bf55-b33200bf0355",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=c39c8242-9c11-4cc7-bf55-b33200bf0355",
+              "duration_min": 59.9
+            },
+            {
+              "n": 17,
+              "title": "MA Analysis 1 HXLY-02-213 2025-12-03",
+              "date": "2025-12-03",
+              "delivery_id": "5e79666c-3efa-49b5-8017-b33200be9d08",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5e79666c-3efa-49b5-8017-b33200be9d08",
+              "duration_min": 60.0
+            },
+            {
+              "n": 18,
+              "title": "MA Analysis 1 HXLY-02-213 2025-12-04",
+              "date": "2025-12-04",
+              "delivery_id": "ec7dba33-d6aa-4071-ac9d-b33200be4607",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ec7dba33-d6aa-4071-ac9d-b33200be4607",
+              "duration_min": 59.9
+            },
+            {
+              "n": 19,
+              "title": "MA Analysis 1 HXLY-02-213 2025-12-08",
+              "date": "2025-12-08",
+              "delivery_id": "4ebc0b4b-3323-4be0-8693-b33200bf0510",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4ebc0b4b-3323-4be0-8693-b33200bf0510",
+              "duration_min": 59.9
+            },
+            {
+              "n": 20,
+              "title": "MA Analysis 1 HXLY-02-213 2025-12-10",
+              "date": "2025-12-10",
+              "delivery_id": "e5144929-ccf6-47c2-a23a-b33200be9ec0",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e5144929-ccf6-47c2-a23a-b33200be9ec0",
+              "duration_min": 60.0
+            },
+            {
+              "n": 21,
+              "title": "MA Analysis 1 HXLY-02-213 2025-12-11",
+              "date": "2025-12-11",
+              "delivery_id": "23a1c3cd-99a3-4af4-b8fc-b33200be47c3",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=23a1c3cd-99a3-4af4-b8fc-b33200be47c3",
+              "duration_min": 60.0
+            }
+          ]
+        },
+        "spring": {
+          "lectures": [
+            {
+              "n": 1,
+              "title": "MA Analysis 1 HXLY-03-308 2026-01-12",
+              "date": "2026-01-12",
+              "delivery_id": "b8a84852-d825-48e4-8ea2-b33200ad8d32",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b8a84852-d825-48e4-8ea2-b33200ad8d32",
+              "duration_min": 51.7
+            },
+            {
+              "n": 2,
+              "title": "MA Analysis 1 HXLY-02-213 2026-01-15",
+              "date": "2026-01-15",
+              "delivery_id": "89f4b6aa-6f6e-455e-833a-b33200b6e432",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=89f4b6aa-6f6e-455e-833a-b33200b6e432",
+              "duration_min": 59.9
+            },
+            {
+              "n": 3,
+              "title": "MA Analysis 1 HXLY-03-308 2026-01-19",
+              "date": "2026-01-19",
+              "delivery_id": "24483080-72eb-434c-bd6f-b33200ad8ee1",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=24483080-72eb-434c-bd6f-b33200ad8ee1",
+              "duration_min": 52.5
+            },
+            {
+              "n": 4,
+              "title": "MA Analysis 1 HXLY-02-213 2026-01-22",
+              "date": "2026-01-22",
+              "delivery_id": "2639b5cd-576f-46a5-814a-b33200b6e676",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=2639b5cd-576f-46a5-814a-b33200b6e676",
+              "duration_min": 59.9
+            },
+            {
+              "n": 5,
+              "title": "MA Analysis 1 HXLY-03-308 2026-01-26",
+              "date": "2026-01-26",
+              "delivery_id": "4bd5e1ea-527b-472c-8cd2-b33200ad90c8",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4bd5e1ea-527b-472c-8cd2-b33200ad90c8",
+              "duration_min": 55.9
+            },
+            {
+              "n": 6,
+              "title": "MA Analysis 1 HXLY-02-213 2026-01-29",
+              "date": "2026-01-29",
+              "delivery_id": "299c682b-0109-49f6-b1b4-b33200b6e805",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=299c682b-0109-49f6-b1b4-b33200b6e805",
+              "duration_min": 60.0
+            },
+            {
+              "n": 7,
+              "title": "MA Analysis 1 HXLY-03-308 2026-02-02",
+              "date": "2026-02-02",
+              "delivery_id": "50a9d71d-32d3-4d25-a464-b33200ad9280",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=50a9d71d-32d3-4d25-a464-b33200ad9280",
+              "duration_min": 52.6
+            },
+            {
+              "n": 8,
+              "title": "MA Analysis 1 HXLY-02-213 2026-02-05",
+              "date": "2026-02-05",
+              "delivery_id": "2f14825f-a982-44d7-b13a-b33200b6ea49",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=2f14825f-a982-44d7-b13a-b33200b6ea49",
+              "duration_min": 59.8
+            },
+            {
+              "n": 9,
+              "title": "MA Analysis 1 HXLY-03-308 2026-02-09",
+              "date": "2026-02-09",
+              "delivery_id": "b3b5f57a-d610-4021-befc-b33200ad9414",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b3b5f57a-d610-4021-befc-b33200ad9414",
+              "duration_min": 59.0
+            },
+            {
+              "n": 10,
+              "title": "MA Analysis 1 HXLY-02-213 2026-02-12",
+              "date": "2026-02-12",
+              "delivery_id": "c5cbea3d-17d4-4633-bc57-b33200b6ebf5",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=c5cbea3d-17d4-4633-bc57-b33200b6ebf5",
+              "duration_min": 60.0
+            },
+            {
+              "n": 11,
+              "title": "MA Analysis 1 HXLY-03-308 2026-02-16",
+              "date": "2026-02-16",
+              "delivery_id": "990cfe43-61e0-40ea-a519-b33200ad95b8",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=990cfe43-61e0-40ea-a519-b33200ad95b8",
+              "duration_min": 60.0
+            },
+            {
+              "n": 12,
+              "title": "MA Analysis 1 HXLY-02-213 2026-02-19",
+              "date": "2026-02-19",
+              "delivery_id": "7f6318e7-3e60-4ca3-83ec-b33200b6ee3c",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=7f6318e7-3e60-4ca3-83ec-b33200b6ee3c",
+              "duration_min": 59.9
+            },
+            {
+              "n": 13,
+              "title": "MA Analysis 1 HXLY-03-308 2026-02-23",
+              "date": "2026-02-23",
+              "delivery_id": "11ffbbe9-c071-4aa7-8c31-b33200ad976b",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=11ffbbe9-c071-4aa7-8c31-b33200ad976b",
+              "duration_min": 60.0
+            },
+            {
+              "n": 14,
+              "title": "MA Analysis 1 HXLY-02-213 2026-02-26",
+              "date": "2026-02-26",
+              "delivery_id": "2573703a-1d0d-4b0a-845e-b33200b6f08a",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=2573703a-1d0d-4b0a-845e-b33200b6f08a",
+              "duration_min": 60.0
+            },
+            {
+              "n": 15,
+              "title": "MA Analysis 1 HXLY-03-308 2026-03-02",
+              "date": "2026-03-02",
+              "delivery_id": "947f6f6f-6cb2-4adb-9bc8-b33200ad98ec",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=947f6f6f-6cb2-4adb-9bc8-b33200ad98ec",
+              "duration_min": 55.3
+            },
+            {
+              "n": 16,
+              "title": "MA Analysis 1 HXLY-02-213 2026-03-05",
+              "date": "2026-03-05",
+              "delivery_id": "58ba70d5-1193-4429-9c78-b33200b6f24d",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=58ba70d5-1193-4429-9c78-b33200b6f24d",
+              "duration_min": 59.7
+            },
+            {
+              "n": 17,
+              "title": "MA Analysis 1 HXLY-03-308 2026-03-09",
+              "date": "2026-03-09",
+              "delivery_id": "e4c5608d-e404-4fcd-abdb-b33200ad9adb",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e4c5608d-e404-4fcd-abdb-b33200ad9adb",
+              "duration_min": 57.5
+            },
+            {
+              "n": 18,
+              "title": "MA Analysis 1 HXLY-02-213 2026-03-12",
+              "date": "2026-03-12",
+              "delivery_id": "9d514300-878c-48aa-a796-b33200b6f431",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9d514300-878c-48aa-a796-b33200b6f431",
+              "duration_min": 60.0
+            },
+            {
+              "n": 19,
+              "title": "MA Analysis 1 HXLY-03-308 2026-03-16",
+              "date": "2026-03-16",
+              "delivery_id": "ba345bdb-2c16-4de8-bfc2-b33200ad9c87",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ba345bdb-2c16-4de8-bfc2-b33200ad9c87",
+              "duration_min": 59.9
+            },
+            {
+              "n": 20,
+              "title": "MA Analysis 1 HXLY-03-311 2026-03-19",
+              "date": "2026-03-19",
+              "delivery_id": "5fe0441a-b1e9-4e81-b858-b4050107e114",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5fe0441a-b1e9-4e81-b858-b4050107e114",
+              "duration_min": 60.0
+            }
+          ]
+        }
+      }
+    },
+    "calculus": {
+      "code": "MATH40004",
+      "title": "Calculus and Applications",
+      "exam_date": "2026-05-06",
+      "terms": {
+        "autumn": {
+          "lectures": [
+            {
+              "n": 1,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-10-27",
+              "date": "2025-10-27",
+              "delivery_id": "8864f534-01e6-45cf-9369-b33200bfa6b4",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=8864f534-01e6-45cf-9369-b33200bfa6b4",
+              "duration_min": 59.8
+            },
+            {
+              "n": 2,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-10-28",
+              "date": "2025-10-28",
+              "delivery_id": "c1690aa7-92ce-4ba7-ab87-b3330110c8a3",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=c1690aa7-92ce-4ba7-ab87-b3330110c8a3",
+              "duration_min": 60.0
+            },
+            {
+              "n": 3,
+              "title": "MA Calculus and Applications HXLY-01-144 2025-10-28",
+              "date": "2025-10-28",
+              "delivery_id": "f5792337-804e-445c-b95c-b37100c655f3",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f5792337-804e-445c-b95c-b37100c655f3",
+              "duration_min": 0.5
+            },
+            {
+              "n": 4,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-10-30",
+              "date": "2025-10-30",
+              "delivery_id": "ce197743-e784-4cba-af03-b33200be73af",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ce197743-e784-4cba-af03-b33200be73af",
+              "duration_min": 60.0
+            },
+            {
+              "n": 5,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-03",
+              "date": "2025-11-03",
+              "delivery_id": "bc36a4b2-9b9a-423b-b3f9-b33200bfa91a",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=bc36a4b2-9b9a-423b-b3f9-b33200bfa91a",
+              "duration_min": 59.9
+            },
+            {
+              "n": 6,
+              "title": "MA Calculus and Applications HXLY-01-144 2025-11-04",
+              "date": "2025-11-04",
+              "delivery_id": "0f68e43e-dbae-4ca8-8219-b37100c656e3",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=0f68e43e-dbae-4ca8-8219-b37100c656e3",
+              "duration_min": 0.4
+            },
+            {
+              "n": 7,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-04",
+              "date": "2025-11-04",
+              "delivery_id": "99262e2d-2d3c-4b4a-8d28-b3330110cbdf",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=99262e2d-2d3c-4b4a-8d28-b3330110cbdf",
+              "duration_min": 59.9
+            },
+            {
+              "n": 8,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-06",
+              "date": "2025-11-06",
+              "delivery_id": "146a9355-6313-4bb9-a89b-b33200be7799",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=146a9355-6313-4bb9-a89b-b33200be7799",
+              "duration_min": 60.0
+            },
+            {
+              "n": 9,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-10",
+              "date": "2025-11-10",
+              "delivery_id": "f9fe71ce-e552-46b9-8388-b33200bfaaad",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f9fe71ce-e552-46b9-8388-b33200bfaaad",
+              "duration_min": 60.0
+            },
+            {
+              "n": 10,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-11",
+              "date": "2025-11-11",
+              "delivery_id": "d740ae73-9c21-4185-a96a-b3330110cddd",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=d740ae73-9c21-4185-a96a-b3330110cddd",
+              "duration_min": 60.0
+            },
+            {
+              "n": 11,
+              "title": "MA Calculus and Applications HXLY-01-144 2025-11-11",
+              "date": "2025-11-11",
+              "delivery_id": "75fe5f85-6a1c-4c0e-a074-b37100c657a4",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=75fe5f85-6a1c-4c0e-a074-b37100c657a4",
+              "duration_min": 60.0
+            },
+            {
+              "n": 12,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-13",
+              "date": "2025-11-13",
+              "delivery_id": "9c955155-547f-4f3e-bf8c-b33200be790c",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9c955155-547f-4f3e-bf8c-b33200be790c",
+              "duration_min": 60.0
+            },
+            {
+              "n": 13,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-17",
+              "date": "2025-11-17",
+              "delivery_id": "8c9d2573-12a8-48ed-88f0-b33200bfac24",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=8c9d2573-12a8-48ed-88f0-b33200bfac24",
+              "duration_min": 59.8
+            },
+            {
+              "n": 14,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-18",
+              "date": "2025-11-18",
+              "delivery_id": "5ce9ac89-66ab-4ef2-af6e-b3330110cf87",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5ce9ac89-66ab-4ef2-af6e-b3330110cf87",
+              "duration_min": 60.0
+            },
+            {
+              "n": 15,
+              "title": "MA Calculus and Applications HXLY-01-144 2025-11-18",
+              "date": "2025-11-18",
+              "delivery_id": "61ed6cc6-6b67-4c06-b767-b37100c65865",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=61ed6cc6-6b67-4c06-b767-b37100c65865",
+              "duration_min": 20.3
+            },
+            {
+              "n": 16,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-20",
+              "date": "2025-11-20",
+              "delivery_id": "7a800008-32d1-4c87-a2cb-b33200be7ab6",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=7a800008-32d1-4c87-a2cb-b33200be7ab6",
+              "duration_min": 60.0
+            },
+            {
+              "n": 17,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-24",
+              "date": "2025-11-24",
+              "delivery_id": "8e4e372c-99da-4652-b8ae-b33200bfae1c",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=8e4e372c-99da-4652-b8ae-b33200bfae1c",
+              "duration_min": 60.0
+            },
+            {
+              "n": 18,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-25",
+              "date": "2025-11-25",
+              "delivery_id": "731333f2-1428-4f75-b448-b3330110d14f",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=731333f2-1428-4f75-b448-b3330110d14f",
+              "duration_min": 60.0
+            },
+            {
+              "n": 19,
+              "title": "MA Calculus and Applications HXLY-01-144 2025-11-25",
+              "date": "2025-11-25",
+              "delivery_id": "e2e249d3-7c50-4940-8a17-b37100c65975",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e2e249d3-7c50-4940-8a17-b37100c65975",
+              "duration_min": 44.9
+            },
+            {
+              "n": 20,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-11-27",
+              "date": "2025-11-27",
+              "delivery_id": "de10a3b8-8063-4f85-b53e-b33200be7c34",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=de10a3b8-8063-4f85-b53e-b33200be7c34",
+              "duration_min": 60.0
+            },
+            {
+              "n": 21,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-12-01",
+              "date": "2025-12-01",
+              "delivery_id": "7cc27927-96bf-4b30-bcc1-b33200bfaf9b",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=7cc27927-96bf-4b30-bcc1-b33200bfaf9b",
+              "duration_min": 59.9
+            },
+            {
+              "n": 22,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-12-02",
+              "date": "2025-12-02",
+              "delivery_id": "31b1757e-270d-4451-827b-b3330110d330",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=31b1757e-270d-4451-827b-b3330110d330",
+              "duration_min": 29.0
+            },
+            {
+              "n": 23,
+              "title": "MA Calculus and Applications HXLY-01-144 2025-12-02",
+              "date": "2025-12-02",
+              "delivery_id": "02c5ddff-42d5-4966-a117-b37100c65a94",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=02c5ddff-42d5-4966-a117-b37100c65a94",
+              "duration_min": 19.6
+            },
+            {
+              "n": 24,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-12-04",
+              "date": "2025-12-04",
+              "delivery_id": "040abc05-4dd0-4e50-affa-b33200be7def",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=040abc05-4dd0-4e50-affa-b33200be7def",
+              "duration_min": 60.0
+            },
+            {
+              "n": 25,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-12-08",
+              "date": "2025-12-08",
+              "delivery_id": "c67d9da3-2c8d-4fcb-bc10-b33200bfb154",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=c67d9da3-2c8d-4fcb-bc10-b33200bfb154",
+              "duration_min": 60.0
+            },
+            {
+              "n": 26,
+              "title": "MA Calculus and Applications HXLY-01-144 2025-12-09",
+              "date": "2025-12-09",
+              "delivery_id": "414dd861-f578-4d9e-bed7-b37100c65b8c",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=414dd861-f578-4d9e-bed7-b37100c65b8c",
+              "duration_min": 5.7
+            },
+            {
+              "n": 27,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-12-09",
+              "date": "2025-12-09",
+              "delivery_id": "9001a964-3a88-451d-8bce-b3330110d4aa",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9001a964-3a88-451d-8bce-b3330110d4aa",
+              "duration_min": 60.0
+            },
+            {
+              "n": 28,
+              "title": "MA Calculus and Applications HXLY-02-213 2025-12-11",
+              "date": "2025-12-11",
+              "delivery_id": "181de894-f972-4b34-b7ad-b33200be802b",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=181de894-f972-4b34-b7ad-b33200be802b",
+              "duration_min": 60.0
+            }
+          ]
+        },
+        "spring": {
+          "lectures": [
+            {
+              "n": 1,
+              "title": "MA Calculus and Appliecations HXLY-02-213 2026-01-12",
+              "date": "2026-01-12",
+              "delivery_id": "24a66d24-d05a-494f-aed9-b33200bde32e",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=24a66d24-d05a-494f-aed9-b33200bde32e",
+              "duration_min": 60.0
+            },
+            {
+              "n": 2,
+              "title": "MA Calculus and Applications HXLY-02-213 2026-01-15",
+              "date": "2026-01-15",
+              "delivery_id": "074a33c9-6b19-4cca-89a8-b33200b6f55d",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=074a33c9-6b19-4cca-89a8-b33200b6f55d",
+              "duration_min": 59.9
+            },
+            {
+              "n": 3,
+              "title": "MA Calculus and Appliecations HXLY-02-213 2026-01-19",
+              "date": "2026-01-19",
+              "delivery_id": "f44d6770-3b1a-4aa9-8814-b33200bde48f",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f44d6770-3b1a-4aa9-8814-b33200bde48f",
+              "duration_min": 60.0
+            },
+            {
+              "n": 4,
+              "title": "MA Calculus and Applications HXLY-02-213 2026-01-22",
+              "date": "2026-01-22",
+              "delivery_id": "ad6f6ced-01a1-42e9-a817-b33200b6f8e2",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ad6f6ced-01a1-42e9-a817-b33200b6f8e2",
+              "duration_min": 59.8
+            },
+            {
+              "n": 5,
+              "title": "MA Calculus and Appliecations HXLY-02-213 2026-01-26",
+              "date": "2026-01-26",
+              "delivery_id": "1d9f817f-0f79-404a-81f7-b33200bde644",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1d9f817f-0f79-404a-81f7-b33200bde644",
+              "duration_min": 60.0
+            },
+            {
+              "n": 6,
+              "title": "MA Calculus and Applications HXLY-02-213 2026-01-29",
+              "date": "2026-01-29",
+              "delivery_id": "84ccf328-9b88-4956-aae1-b33200b6fac6",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=84ccf328-9b88-4956-aae1-b33200b6fac6",
+              "duration_min": 59.9
+            },
+            {
+              "n": 7,
+              "title": "MA Calculus and Appliecations HXLY-02-213 2026-02-02",
+              "date": "2026-02-02",
+              "delivery_id": "9e9ba83d-5fc9-4201-a69f-b33200bde7f7",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9e9ba83d-5fc9-4201-a69f-b33200bde7f7",
+              "duration_min": 59.8
+            },
+            {
+              "n": 8,
+              "title": "MA Calculus and Applications HXLY-02-213 2026-02-05",
+              "date": "2026-02-05",
+              "delivery_id": "d5044b4f-fa57-4b9d-a2dc-b33200b6fc44",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=d5044b4f-fa57-4b9d-a2dc-b33200b6fc44",
+              "duration_min": 60.0
+            },
+            {
+              "n": 9,
+              "title": "MA Calculus and Appliecations HXLY-02-213 2026-02-16",
+              "date": "2026-02-16",
+              "delivery_id": "275319ad-37c0-4923-9143-b33200be8a11",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=275319ad-37c0-4923-9143-b33200be8a11",
+              "duration_min": 60.0
+            },
+            {
+              "n": 10,
+              "title": "MA Calculus and Applications HXLY-02-213 2026-02-19",
+              "date": "2026-02-19",
+              "delivery_id": "1a218db0-1d5c-441f-97ee-b33200b6ffe7",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1a218db0-1d5c-441f-97ee-b33200b6ffe7",
+              "duration_min": 60.0
+            },
+            {
+              "n": 11,
+              "title": "MA Calculus and Appliecations HXLY-02-213 2026-02-23",
+              "date": "2026-02-23",
+              "delivery_id": "ac3d1318-6fed-4cf3-95a7-b33200be8b91",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ac3d1318-6fed-4cf3-95a7-b33200be8b91",
+              "duration_min": 60.0
+            },
+            {
+              "n": 12,
+              "title": "MA Calculus and Applications HXLY-02-213 2026-02-26",
+              "date": "2026-02-26",
+              "delivery_id": "97c49584-acd5-4ca5-802b-b33200b70189",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=97c49584-acd5-4ca5-802b-b33200b70189",
+              "duration_min": 60.0
+            },
+            {
+              "n": 13,
+              "title": "MA Calculus and Appliecations HXLY-02-213 2026-03-02",
+              "date": "2026-03-02",
+              "delivery_id": "13361280-a001-425a-880c-b33200be8d62",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=13361280-a001-425a-880c-b33200be8d62",
+              "duration_min": 60.0
+            },
+            {
+              "n": 14,
+              "title": "MA Calculus and Applications HXLY-02-213 2026-03-05",
+              "date": "2026-03-05",
+              "delivery_id": "f6ccbdee-898c-4a24-a38e-b33200b70338",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f6ccbdee-898c-4a24-a38e-b33200b70338",
+              "duration_min": 60.0
+            },
+            {
+              "n": 15,
+              "title": "MA Calculus and Appliecations HXLY-02-213 2026-03-09",
+              "date": "2026-03-09",
+              "delivery_id": "b6cffdb7-2f24-4523-93ed-b33200be8f11",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b6cffdb7-2f24-4523-93ed-b33200be8f11",
+              "duration_min": 60.0
+            },
+            {
+              "n": 16,
+              "title": "MA Calculus and Applications HXLY-02-213 2026-03-12",
+              "date": "2026-03-12",
+              "delivery_id": "5974c634-6d45-45aa-90e9-b33200b704ee",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5974c634-6d45-45aa-90e9-b33200b704ee",
+              "duration_min": 60.0
+            },
+            {
+              "n": 17,
+              "title": "MA Calculus and Appliecations HXLY-02-213 2026-03-16",
+              "date": "2026-03-16",
+              "delivery_id": "d583e13b-0692-4771-94ac-b33200be90f5",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=d583e13b-0692-4771-94ac-b33200be90f5",
+              "duration_min": 60.0
+            },
+            {
+              "n": 18,
+              "title": "MA Calculus and Applications HXLY-03-308 2026-03-19",
+              "date": "2026-03-19",
+              "delivery_id": "29878fba-52e5-42b3-bc3a-b40500ff9e58",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=29878fba-52e5-42b3-bc3a-b40500ff9e58",
+              "duration_min": 16.7
+            },
+            {
+              "n": 19,
+              "title": "Calculus and Applications HXLY-03-340 2026-03-19",
+              "date": "2026-03-19",
+              "delivery_id": "96d407f5-f964-43e3-911e-b41200da8346",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=96d407f5-f964-43e3-911e-b41200da8346",
+              "duration_min": 3.5
+            },
+            {
+              "n": 20,
+              "title": "Calculus and Applications HXLY-03-340 2026-03-19",
+              "date": "2026-03-19",
+              "delivery_id": "86803de1-dfcd-46cc-83a6-b41200db8ff2",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=86803de1-dfcd-46cc-83a6-b41200db8ff2",
+              "duration_min": 45.0
+            }
+          ]
+        }
+      }
+    },
+    "linear-algebra": {
+      "code": "MATH40012",
+      "title": "Linear Algebra and Groups for JMC",
+      "exam_date": "2026-04-29",
+      "terms": {
+        "autumn": {
+          "lectures": [
+            {
+              "n": 1,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-10-29",
+              "date": "2025-10-29",
+              "delivery_id": "cc97a266-c230-45d5-bb5d-b333011215fc",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=cc97a266-c230-45d5-bb5d-b333011215fc",
+              "duration_min": 60.0
+            },
+            {
+              "n": 2,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-10-30",
+              "date": "2025-10-30",
+              "delivery_id": "06c86a84-6279-4394-bbcf-b3330118a5f4",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=06c86a84-6279-4394-bbcf-b3330118a5f4",
+              "duration_min": 120.0
+            },
+            {
+              "n": 3,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-11-05",
+              "date": "2025-11-05",
+              "delivery_id": "be108c3b-1972-4796-8adc-b333011216a7",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=be108c3b-1972-4796-8adc-b333011216a7",
+              "duration_min": 60.0
+            },
+            {
+              "n": 4,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-11-06",
+              "date": "2025-11-06",
+              "delivery_id": "7535d7a8-1c96-4dbf-a376-b3330118a6bd",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=7535d7a8-1c96-4dbf-a376-b3330118a6bd",
+              "duration_min": 120.0
+            },
+            {
+              "n": 5,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-11-12",
+              "date": "2025-11-12",
+              "delivery_id": "cc04991d-fce1-406f-8041-b3330112177b",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=cc04991d-fce1-406f-8041-b3330112177b",
+              "duration_min": 60.0
+            },
+            {
+              "n": 6,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-11-13",
+              "date": "2025-11-13",
+              "delivery_id": "1b1db75c-486f-43c0-9a55-b3330118a7ae",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1b1db75c-486f-43c0-9a55-b3330118a7ae",
+              "duration_min": 120.0
+            },
+            {
+              "n": 7,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-11-19",
+              "date": "2025-11-19",
+              "delivery_id": "ec1fc10a-6213-475e-9392-b33301121827",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ec1fc10a-6213-475e-9392-b33301121827",
+              "duration_min": 60.0
+            },
+            {
+              "n": 8,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-11-20",
+              "date": "2025-11-20",
+              "delivery_id": "6dacd5a1-6aab-4fa3-ac89-b3330118a8a4",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6dacd5a1-6aab-4fa3-ac89-b3330118a8a4",
+              "duration_min": 120.0
+            },
+            {
+              "n": 9,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-11-26",
+              "date": "2025-11-26",
+              "delivery_id": "ebd5196c-5240-43a5-a79a-b333011218bd",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=ebd5196c-5240-43a5-a79a-b333011218bd",
+              "duration_min": 60.0
+            },
+            {
+              "n": 10,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-11-27",
+              "date": "2025-11-27",
+              "delivery_id": "257b93b2-2869-4879-b2aa-b3330118a998",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=257b93b2-2869-4879-b2aa-b3330118a998",
+              "duration_min": 120.0
+            },
+            {
+              "n": 11,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-12-03",
+              "date": "2025-12-03",
+              "delivery_id": "707097d3-99c7-42b5-bdcc-b333011219e0",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=707097d3-99c7-42b5-bdcc-b333011219e0",
+              "duration_min": 60.0
+            },
+            {
+              "n": 12,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-12-04",
+              "date": "2025-12-04",
+              "delivery_id": "2353c22a-1bb1-46db-853e-b3330118aa5d",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=2353c22a-1bb1-46db-853e-b3330118aa5d",
+              "duration_min": 120.0
+            },
+            {
+              "n": 13,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-12-10",
+              "date": "2025-12-10",
+              "delivery_id": "6809c3ba-2c15-47c8-baa9-b33301121ab1",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6809c3ba-2c15-47c8-baa9-b33301121ab1",
+              "duration_min": 60.0
+            },
+            {
+              "n": 14,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2025-12-11",
+              "date": "2025-12-11",
+              "delivery_id": "f55cc19e-67bb-4340-8245-b3330118ab2b",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f55cc19e-67bb-4340-8245-b3330118ab2b",
+              "duration_min": 120.0
+            }
+          ]
+        },
+        "spring": {
+          "lectures": [
+            {
+              "n": 1,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2026-01-12",
+              "date": "2026-01-12",
+              "delivery_id": "dfa0d310-50d9-4c33-96c9-b3cc00f75af0",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=dfa0d310-50d9-4c33-96c9-b3cc00f75af0",
+              "duration_min": 60.0
+            },
+            {
+              "n": 2,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-02-213 2026-01-14",
+              "date": "2026-01-14",
+              "delivery_id": "13e0a30b-eafc-48f1-bd84-b33200be4e18",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=13e0a30b-eafc-48f1-bd84-b33200be4e18",
+              "duration_min": 60.0
+            },
+            {
+              "n": 3,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2026-01-19",
+              "date": "2026-01-19",
+              "delivery_id": "25a733d6-43d7-4a1d-aa7b-b3cc00f75bf6",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=25a733d6-43d7-4a1d-aa7b-b3cc00f75bf6",
+              "duration_min": 60.0
+            },
+            {
+              "n": 4,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-02-213 2026-01-21",
+              "date": "2026-01-21",
+              "delivery_id": "f10b9dc7-ecf3-4e9f-b906-b33200be4ed9",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f10b9dc7-ecf3-4e9f-b906-b33200be4ed9",
+              "duration_min": 60.0
+            },
+            {
+              "n": 5,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2026-01-26",
+              "date": "2026-01-26",
+              "delivery_id": "b6e94785-d465-4570-a668-b3cc00f75d0e",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b6e94785-d465-4570-a668-b3cc00f75d0e",
+              "duration_min": 60.0
+            },
+            {
+              "n": 6,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-02-213 2026-01-28",
+              "date": "2026-01-28",
+              "delivery_id": "7ddcaf61-4798-46fb-98e6-b33200be4f8e",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=7ddcaf61-4798-46fb-98e6-b33200be4f8e",
+              "duration_min": 60.0
+            },
+            {
+              "n": 7,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2026-02-02",
+              "date": "2026-02-02",
+              "delivery_id": "0e1bda36-8438-41c0-a55f-b3cc00f75df8",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=0e1bda36-8438-41c0-a55f-b3cc00f75df8",
+              "duration_min": 60.0
+            },
+            {
+              "n": 8,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-02-213 2026-02-04",
+              "date": "2026-02-04",
+              "delivery_id": "61160f1d-6891-45bd-ac11-b33200be50bd",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=61160f1d-6891-45bd-ac11-b33200be50bd",
+              "duration_min": 60.0
+            },
+            {
+              "n": 9,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2026-02-16",
+              "date": "2026-02-16",
+              "delivery_id": "31f0316d-dcd6-4759-a96c-b3cc00f75f33",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=31f0316d-dcd6-4759-a96c-b3cc00f75f33",
+              "duration_min": 60.0
+            },
+            {
+              "n": 10,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-02-213 2026-02-18",
+              "date": "2026-02-18",
+              "delivery_id": "e3d4876a-b87e-497a-879d-b33200beecfe",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e3d4876a-b87e-497a-879d-b33200beecfe",
+              "duration_min": 60.0
+            },
+            {
+              "n": 11,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2026-02-23",
+              "date": "2026-02-23",
+              "delivery_id": "4952f40a-8663-474a-8203-b3cc00f76029",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4952f40a-8663-474a-8203-b3cc00f76029",
+              "duration_min": 60.0
+            },
+            {
+              "n": 12,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-02-213 2026-02-25",
+              "date": "2026-02-25",
+              "delivery_id": "de98dbdd-9f47-475a-a853-b33200beedf7",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=de98dbdd-9f47-475a-a853-b33200beedf7",
+              "duration_min": 60.0
+            },
+            {
+              "n": 13,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2026-03-02",
+              "date": "2026-03-02",
+              "delivery_id": "17badc8e-09b8-4a36-bf81-b3cc00f7610e",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=17badc8e-09b8-4a36-bf81-b3cc00f7610e",
+              "duration_min": 60.0
+            },
+            {
+              "n": 14,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-02-213 2026-03-04",
+              "date": "2026-03-04",
+              "delivery_id": "a123f26f-3b87-4340-b8e8-b33200beeebe",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a123f26f-3b87-4340-b8e8-b33200beeebe",
+              "duration_min": 60.0
+            },
+            {
+              "n": 15,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2026-03-09",
+              "date": "2026-03-09",
+              "delivery_id": "477a117a-c6f0-4705-9c31-b3cc00f7623d",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=477a117a-c6f0-4705-9c31-b3cc00f7623d",
+              "duration_min": 60.0
+            },
+            {
+              "n": 16,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-02-213 2026-03-11",
+              "date": "2026-03-11",
+              "delivery_id": "99024d75-365f-4aaf-95ae-b33200beefb2",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=99024d75-365f-4aaf-95ae-b33200beefb2",
+              "duration_min": 60.0
+            },
+            {
+              "n": 17,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-01-140 2026-03-16",
+              "date": "2026-03-16",
+              "delivery_id": "6fb19abf-90c1-4fd1-801d-b3ec00dea8bf",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6fb19abf-90c1-4fd1-801d-b3ec00dea8bf",
+              "duration_min": 120.0
+            },
+            {
+              "n": 18,
+              "title": "MA Linear Algebra and Groups for JMC HXLY-02-213 2026-03-18",
+              "date": "2026-03-18",
+              "delivery_id": "70b90d67-7578-450f-b286-b33200bef07f",
+              "viewer_url": "https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=70b90d67-7578-450f-b286-b33200bef07f",
+              "duration_min": 60.0
+            }
+          ]
+        }
+      }
+    }
+  }
+}

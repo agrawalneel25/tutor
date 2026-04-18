@@ -1,44 +1,56 @@
 # tutor
 
-A Claude Code study app for Imperial JMC Year 1. Clone it, open Claude Code, run `/setup`, then catch up on lectures and problem sheets with AI-guided teaching.
+A Claude Code study app for Imperial JMC Year 1. One command, one Imperial login, then you're in exam prep mode: transcripts, rigorous teach notes, dense revision summaries, and a problem-sheet walkthrough.
 
-## Get started
+## One-line install
 
-1. Install [uv](https://docs.astral.sh/uv/) and [Claude Code](https://docs.claude.com/en/docs/claude-code).
-2. Clone this repo and open it in Claude Code:
-   ```bash
-   git clone https://github.com/advitrocks9/tutor.git
-   cd tutor
-   claude --dangerously-skip-permissions
-   ```
-3. Inside Claude Code, type:
-   ```
-   /setup
-   ```
+**macOS / Linux:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/advitrocks9/tutor/main/install.sh | bash
+```
 
-That is all. Claude Code runs the whole setup autonomously: dependencies, Playwright, config, Imperial SSO logins (two headful browser pops where you just log in), and a health check. Then type `/study` to see your dashboard, or `/teach analysis 1` to start learning.
+**Windows (PowerShell):**
+```powershell
+iwr -useb https://raw.githubusercontent.com/advitrocks9/tutor/main/install.ps1 | iex
+```
 
-## What it does
+The installer sets up uv, Node, git, and Claude Code if missing, clones the repo, then launches Claude Code straight into `/setup`. After that you log into Imperial once in a browser and Claude drives the rest.
 
-Pulls Panopto transcripts and Blackboard materials for your JMC modules, turns each lecture or chapter into a rigorous teach.md plus dense revision notes.md, and fans problem sheets into per-question walkthroughs with graduated hints. A local web viewer renders everything with proper math typesetting.
+## Manual install (if you already have `uv` + `claude`)
+
+```bash
+git clone https://github.com/advitrocks9/tutor.git
+cd tutor
+claude --dangerously-skip-permissions
+```
+Then type `/setup` inside Claude Code.
+
+## What you get
+
+- **Course map** (committed) — every Panopto lecture, per subject per term, with delivery IDs and dates. No scraping needed on first run.
+- **Term-aware `/teach`** — lectures restart at 1 each term, so `/teach analysis L3 autumn` and `/teach analysis L3 spring` are different recordings. Agent clarifies term if you don't say.
+- **Exam countdown** — `/study` shows days-until for Linear Algebra (29 Apr), Analysis (5 May), Calculus (6 May) and picks the most valuable next action.
+- **Problem sheet walkthrough** — `/practice analysis sheet-3`, hint ladder, check your attempts.
+- **Local web reader** — `uv run tutor web` renders everything with KaTeX math and a progress tracker.
 
 ## Slash commands
 
-| Command | Use |
-| --- | --- |
-| `/setup` | First-time setup wizard |
-| `/doctor` | Health check for every endpoint and dependency |
-| `/study` | Dashboard showing progress and the next best action |
-| `/teach <subject> <chapter-or-lecture>` | Learn new material |
-| `/practice <subject> <sheet>` | Work a problem sheet question by question |
-| `/hint` | Next hint on the active problem |
-| `/check <your attempt>` | Mark your attempt against the canonical solution |
-| `/skip` | Skip the current problem and advance |
+| Command    | Use                                                        |
+|------------|------------------------------------------------------------|
+| `/setup`   | First-time setup  -  fully autonomous                       |
+| `/doctor`  | Health check every endpoint + dependency                    |
+| `/study`   | Dashboard, exam countdown, one next action                 |
+| `/teach`   | `/teach <subject> <L{n}|ch{n}> <autumn|spring>`             |
+| `/practice`| `/practice <subject> <sheet-slug>`                         |
+| `/hint`    | Next hint on the active problem                            |
+| `/check`   | `/check <attempt>` — mark against the canonical solution    |
+| `/skip`    | Skip current problem, advance                              |
+| `/map`     | `/map <build|show|refresh|path>`                            |
 
 ## Scope
 
-Built for the MATH40002 (Analysis), MATH40004 (Calculus), and MATH40012 (Linear Algebra and Groups) modules in the Imperial JMC Year 1 2025/26 cohort. The Panopto folder GUIDs and Blackboard course IDs are hardcoded because they are the same for every student. CS modules (COMP40008/40009/40018) are out of scope because those materials live on CATE.
+Built for MATH40002 (Analysis), MATH40004 (Calculus), MATH40012 (Linear Algebra & Groups) in the Imperial JMC Year 1 2025/26 cohort. Panopto GUIDs and Blackboard course IDs are the same for every student — they're checked into `src/tutor/shared.py`. CS modules (COMP400xx) are out of scope because those materials live on CATE, not Blackboard.
 
 ## Privacy
 
-Your Imperial SSO cookies live in `auth_state/` and are gitignored. Your preferences in `user.config.json` are gitignored. All fetched lectures, notes, and sheets under `subjects/` are gitignored. Nothing personal ever leaves your machine.
+Your Imperial SSO cookies live in `auth_state/` (gitignored). Your preferences in `user.config.json` are gitignored. All fetched lectures, notes, and sheets under `subjects/` are gitignored. Nothing personal leaves your machine.

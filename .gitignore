@@ -23,9 +23,16 @@ subjects/*/sheets/
 subjects/*/last-done.md
 subjects/*/.progress.json
 
-# Generated caches
+# Generated caches (per-user)
 .claude/knowledge/lecture-map.json
 .claude/knowledge/lecture-map.md
+
+# NOTE: .claude/knowledge/course-map.{json,md} IS committed. Panopto IDs +
+# session titles are the same for every JMC Y1 student — shipping the map
+# means friends don't have to re-scrape after cloning.
+
+# Graphify artifacts (regenerated on commit via post-commit hook)
+graphify-out/
 
 # OS
 .DS_Store

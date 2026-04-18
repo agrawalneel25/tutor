@@ -1,34 +1,31 @@
 ---
-description: Dashboard view  -  what's done, what's in-progress, recommended next action.
+description: Dashboard - exam countdown, coverage per subject, single next action.
 ---
 
-Show the user what's on their plate. Run `uv run tutor status` and present the output, then suggest the single most valuable next action.
+Show the user what matters right now. This is exam-prep mode: the nearest exam dominates.
 
-If `tutor status` isn't available or errors, do this manually:
+## Flow
 
-1. For each subject under `subjects/`:
-   - Count `chapters/ch*-*/teach.md` (done chapters) vs the subject's total chapter count (from the PDF TOC if readable, or just report the count).
-   - Count `lectures/L*-*/teach.md` (done lectures).
-   - For each `sheets/<slug>/.progress.json`: count done / skipped / pending questions.
+1. Run `uv run tutor exams` — countdown table per subject.
+2. Run `uv run tutor status` — coverage breakdown.
+3. If the course map exists (`.claude/knowledge/course-map.json`), summarise what is unindexed: how many lectures per subject/term are indexed vs how many have local `teach.md`/`notes.md` folders. That is the user's catchup gap.
+4. Pick **one** next action. Decision order:
+   - If any exam is ≤ 3 days: push the subject with the soonest exam and the largest untaught gap.
+   - Else if an in-progress sheet has pending questions: resume that sheet.
+   - Else: biggest uncovered chapter/lecture in the subject with the soonest exam.
 
-2. Identify the **single most valuable next action** based on:
-   - Nearest exam (check `course-context.md`  -  summer assessment is 2026-04-27 to 2026-05-08).
-   - Biggest gap: which subject has the fewest taught chapters relative to course scope?
-   - In-progress sheets: pick up where they left off.
-
-3. Output shape (keep tight  -  no walls of text):
+## Output shape
 
 ```
-tutor status
+Exams:   LinAlg 29 Apr (11d)   Analysis 5 May (17d)   Calculus 6 May (18d)
 
-Analysis (MATH40002)
-  ✓ 2 chapters taught   · 1 lecture · 0/0 sheets
-Calculus (MATH40004)
-   -  empty
-Linear Algebra (MATH40012)
-   -  empty
+Analysis (MATH40002)   autumn: 10/21 taught · spring: 0/20 taught   sheets: 3/7 done
+Calculus (MATH40004)   autumn: 0/21 taught  · spring: 0/27 taught   sheets: 0/6 done
+LinAlg   (MATH40012)   autumn: 0/14 taught  · spring: 0/18 taught   sheets: 0/8 done
 
-Next: /teach calculus 1   (weakest subject; covers integration techniques)
+Next: /teach linear-algebra L1 autumn   (LinAlg exam in 11 days, zero coverage)
 ```
 
-End with the Next suggestion. Don't offer more than one  -  decision fatigue slows them down.
+Format the numbers right, keep it tight. No commentary walls.
+
+End with exactly one `Next:` line.

@@ -17,6 +17,11 @@ from .shared import (
     SUBJECT_SLUGS,
     SubjectMeta,
     subject,
+    ACADEMIC_YEAR,
+    ACADEMIC_YEAR_START,
+    TERM_DATES,
+    TERMS,
+    EXAMS,
 )
 
 REPO = Path(__file__).resolve().parents[2]
@@ -25,6 +30,9 @@ PANOPTO_STATE = AUTH_DIR / "panopto.json"
 BLACKBOARD_STATE = AUTH_DIR / "blackboard.json"
 SUBJECTS_DIR = REPO / "subjects"
 WEBUI_DIR = REPO / "webui"
+KNOWLEDGE_DIR = REPO / ".claude" / "knowledge"
+COURSE_MAP_JSON = KNOWLEDGE_DIR / "course-map.json"
+COURSE_MAP_MD = KNOWLEDGE_DIR / "course-map.md"
 
 USER_CONFIG_PATH = REPO / "user.config.json"
 
@@ -80,6 +88,8 @@ USER = UserConfig.load()
 __all__ = [
     "PANOPTO_HOST", "BLACKBOARD_HOST", "BB_COOKIE_ALLOWLIST", "PANOPTO_DEFAULT_LANG",
     "SUBJECTS", "SUBJECT_SLUGS", "SubjectMeta", "subject",
+    "ACADEMIC_YEAR", "ACADEMIC_YEAR_START", "TERM_DATES", "TERMS", "EXAMS",
     "REPO", "AUTH_DIR", "PANOPTO_STATE", "BLACKBOARD_STATE", "SUBJECTS_DIR", "WEBUI_DIR",
+    "KNOWLEDGE_DIR", "COURSE_MAP_JSON", "COURSE_MAP_MD",
     "USER_CONFIG_PATH", "Preferences", "UserConfig", "USER",
 ]

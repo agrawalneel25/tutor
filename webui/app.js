@@ -219,6 +219,7 @@ async function showQuestion(sheet, qid) {
     </div>
   `;
   document.getElementById('q-body').innerHTML = body_html;
+  // Math in statement was already rendered inline via render(); no extra pass needed.
 
   const revealArea = document.getElementById('reveal-area');
   const reveals = {};
@@ -230,7 +231,6 @@ async function showQuestion(sheet, qid) {
     div.className = cls;
     div.innerHTML = `<h3>${title}</h3>${render(content)}`;
     revealArea.appendChild(div);
-    typesetMath(div);
   }
 
   for (const btn of document.querySelectorAll('[data-reveal]')) {
@@ -272,8 +272,6 @@ async function showQuestion(sheet, qid) {
     navigator.clipboard?.writeText(prompt);
     flash('copied /check prompt');
   });
-
-  typesetMath(document.getElementById('q-body'));
 }
 
 function nextQuestion(sheet, qid) {
@@ -296,25 +294,42 @@ async function postProgress(update) {
 
 function renderMarkdown(target, md) {
   target.innerHTML = render(md);
-  typesetMath(target);
 }
 
+// Marked's parser treats `_` and `*` inside $...$ as emphasis, which mangles
+// subscripts like $P_{n,a}$ before KaTeX sees them. We protect math spans
+// with unique placeholders, run marked on the rest, then swap KaTeX HTML in.
 function render(md) {
   if (!md) return '';
-  return marked.parse(md, { gfm: true, breaks: false });
-}
+  const spans = [];
+  const token = (i) => `@@MATH_${i}_ZZ@@`;
 
-function typesetMath(root) {
-  if (!window.renderMathInElement) return;
-  renderMathInElement(root, {
-    delimiters: [
-      { left: '$$', right: '$$', display: true },
-      { left: '$', right: '$', display: false },
-      { left: '\\[', right: '\\]', display: true },
-      { left: '\\(', right: '\\)', display: false },
-    ],
-    throwOnError: false,
+  // Block math first — $$...$$ — can span multiple lines.
+  let src = md.replace(/\$\$([\s\S]+?)\$\$/g, (_, body) => {
+    spans.push({ display: true, body });
+    return token(spans.length - 1);
   });
+
+  // Inline math — $...$ — single line, non-empty, no surrounding whitespace
+  // inside the delimiters so "$5 and $10" currency does not match.
+  src = src.replace(/\$(\S(?:[^\n$]*\S)?)\$/g, (_, body) => {
+    spans.push({ display: false, body });
+    return token(spans.length - 1);
+  });
+
+  let html = marked.parse(src, { gfm: true, breaks: false });
+
+  html = html.replace(/@@MATH_(\d+)_ZZ@@/g, (_, i) => {
+    const { display, body } = spans[parseInt(i, 10)];
+    if (!window.katex) return (display ? '$$' : '$') + body + (display ? '$$' : '$');
+    try {
+      return katex.renderToString(body, { displayMode: display, throwOnError: false });
+    } catch (err) {
+      return `<span class="katex-error" title="${String(err).replace(/"/g, "'")}">${display ? '$$' : '$'}${body}${display ? '$$' : '$'}</span>`;
+    }
+  });
+
+  return html;
 }
 
 function splitFrontmatter(md) {

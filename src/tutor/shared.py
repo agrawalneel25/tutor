@@ -4,10 +4,32 @@ Per-user overrides live in user.config.json at the repo root.
 """
 from __future__ import annotations
 from dataclasses import dataclass
+from datetime import date
 from typing import Optional
 
 PANOPTO_HOST = "https://imperial.cloud.panopto.eu"
 BLACKBOARD_HOST = "https://bb.imperial.ac.uk"
+
+# Academic year filter. Any Panopto recording before this date is from a
+# previous cohort and must be ignored when building the course map.
+ACADEMIC_YEAR = "2025-26"
+ACADEMIC_YEAR_START = date(2025, 9, 1)
+
+# Imperial 2025-26 teaching weeks (from the course handbook). Used to bucket
+# Panopto recordings into autumn vs spring. Anything between these is holiday
+# and should not be counted as a lecture.
+TERM_DATES = {
+    "autumn": (date(2025, 10, 6),  date(2025, 12, 12)),
+    "spring": (date(2026, 1, 12),  date(2026, 3, 20)),
+}
+TERMS = ("autumn", "spring")
+
+# Final exams. Used for countdown + urgency ranking in /study.
+EXAMS: dict[str, date] = {
+    "linear-algebra": date(2026, 4, 29),
+    "analysis":       date(2026, 5,  5),
+    "calculus":       date(2026, 5,  6),
+}
 
 # Blackboard cookies beyond this set overflow nginx; SSO cookies like ESTSAUTH*
 # must be stripped.
