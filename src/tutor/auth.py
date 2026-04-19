@@ -14,7 +14,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, BrowserContext
 from rich import print
 
-from .config import PANOPTO_HOST, BLACKBOARD_HOST, PANOPTO_STATE, BLACKBOARD_STATE, EXAMS_STATE, EXAMS_HOST
+from .config import PANOPTO_HOST, BLACKBOARD_HOST, PANOPTO_STATE, BLACKBOARD_STATE, EXAMS_STATE, EXAMS_CREDS, EXAMS_HOST
 
 
 PANOPTO_HOME = f"{PANOPTO_HOST}/Panopto/Pages/Home.aspx"
@@ -60,6 +60,7 @@ def login_blackboard() -> None:
 
 def login_exams(username: str = "", password: str = "") -> None:
     """Single-host: exams.doc.ic.ac.uk. Passes HTTP Basic Auth credentials."""
+    import json
     http_credentials = {"username": username, "password": password} if username else None
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
@@ -67,6 +68,8 @@ def login_exams(username: str = "", password: str = "") -> None:
         ctx.new_page()
         _wait_and_save(ctx, EXAMS_HOME, EXAMS_SUCCESS, EXAMS_STATE, "Exams site")
         browser.close()
+    if username:
+        EXAMS_CREDS.write_text(json.dumps({"username": username, "password": password}))
 
 
 def login_all() -> None:
