@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(uv run *)",
+      "Bash(uv pip install *)",
+      "Bash(codex mcp add *)",
+      "Bash(Get-Content *)",
+      "Bash(Get-ChildItem *)",
+      "Bash(Select-String *)",
+      "Bash(Select-Object *)",
+      "Bash(Where-Object *)",
+      "Bash(ForEach-Object *)",
+      "Bash(python -c ' *)"
+    ]
+  }
+}

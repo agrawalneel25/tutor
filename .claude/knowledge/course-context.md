@@ -82,9 +82,9 @@ Often recorded twice (main + overflow); Panopto lists both, map numbers chronolo
 
 Exact lecture counts per term are whatever the map reports after build. Don't hard-code.
 
-## CS modules (out of scope)
+## CS modules and Scientia exports
 
-COMP40008 / COMP40009 / COMP40018 materials live on CATE, not Blackboard. No CATE integration. If the user asks for CS, tell them it's manual and move on.
+COMP40008 / COMP40009 / COMP40018 materials are not in Blackboard. Use Scientia/CATE exports instead. The repo now supports local Scientia root discovery, indexing, and full-text search. Live Scientia scraping is still out of scope. If the user asks for a CS module, tell them to use a Scientia export or local folder and search it there.
 
 ## Teaching style
 

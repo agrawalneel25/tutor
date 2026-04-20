@@ -19,6 +19,7 @@ from . import panopto as pp
 from . import blackboard as bb
 from . import doctor as doctor_mod
 from . import init as init_mod
+from . import scientia as scientia_mod
 from . import status as status_mod
 from . import course_map as cm
 from . import exams_scraper
@@ -35,11 +36,13 @@ panopto_app = typer.Typer(help="Panopto operations.")
 bb_app = typer.Typer(help="Blackboard operations.")
 map_app = typer.Typer(help="Course map: index of lectures, chapters, exam dates.")
 papers_app = typer.Typer(help="Past exam papers from exams.doc.ic.ac.uk.")
+scientia_app = typer.Typer(help="Scientia/CATE document-library search and indexing.")
 app.add_typer(auth_app, name="auth")
 app.add_typer(panopto_app, name="panopto")
 app.add_typer(bb_app, name="bb")
 app.add_typer(map_app, name="map")
 app.add_typer(papers_app, name="papers")
+app.add_typer(scientia_app, name="scientia")
 
 console = Console()
 
@@ -477,6 +480,81 @@ def cmd_papers_fetch(
             print(f"  {p}")
     else:
         print("[yellow]No papers downloaded. Try: tutor auth exams[/]")
+
+
+# ---------- scientia ----------
+@scientia_app.command("discover")
+def cmd_scientia_discover(
+    limit: int = typer.Option(20, "--limit", help="Maximum roots to show."),
+) -> None:
+    """Suggest likely Scientia/CATE export roots on this machine."""
+    roots = scientia_mod.discover_roots(limit=limit)
+    if not roots:
+        print("[yellow]No obvious Scientia/CATE roots found.[/]")
+        print("Try pointing `tutor scientia set-root` at your export folder once.")
+        raise typer.Exit(1)
+    for p in roots:
+        print(str(p))
+
+
+@scientia_app.command("set-root")
+def cmd_scientia_set_root(
+    root: Path = typer.Argument(..., exists=True, file_okay=False, dir_okay=True, resolve_path=True),
+) -> None:
+    """Store the Scientia/CATE export root in user.config.json."""
+    cfg = UserConfig.load()
+    cfg.scientia_root = str(root)
+    cfg.save()
+    print(f"[green]Saved[/] Scientia root: {root}")
+    print(f"[dim]Index will be written to[/] {scientia_mod.SCIENTIA_INDEX_JSON}")
+
+
+@scientia_app.command("show")
+def cmd_scientia_show() -> None:
+    """Show the configured Scientia root and current index status."""
+    cfg = UserConfig.load()
+    root = cfg.scientia_root.strip()
+    print(f"Scientia root: {root or '[unset]'}")
+    print(f"Index: {scientia_mod.SCIENTIA_INDEX_JSON}")
+    index = scientia_mod.load_index()
+    if index:
+        print(f"Indexed docs: {index.get('doc_count', 0)}")
+        print(f"Indexed at: {index.get('generated_at', '?')}")
+    else:
+        print("Indexed docs: [dim]none[/]")
+
+
+@scientia_app.command("index")
+def cmd_scientia_index(
+    root: Optional[Path] = typer.Option(None, "--root", exists=True, file_okay=False, dir_okay=True, resolve_path=True),
+) -> None:
+    """Build a full-text index for a Scientia/CATE export."""
+    resolved = root or scientia_mod.default_root()
+    if resolved is None:
+        raise typer.BadParameter("no Scientia root configured; use `tutor scientia set-root <path>` or `--root`")
+    print(f"[cyan]Indexing[/] {resolved}")
+    index = scientia_mod.build_index(resolved)
+    scientia_mod.save_index(index)
+    print(f"[green]Done[/] {index['doc_count']} documents -> {scientia_mod.SCIENTIA_INDEX_JSON}")
+
+
+@scientia_app.command("search")
+def cmd_scientia_search(
+    query: str = typer.Argument(..., help="Search phrase or keywords."),
+    root: Optional[Path] = typer.Option(None, "--root", exists=True, file_okay=False, dir_okay=True, resolve_path=True),
+    limit: int = typer.Option(20, "--limit", help="Maximum matches to print."),
+) -> None:
+    """Search Scientia/CATE docs by filename and extracted text."""
+    results = scientia_mod.search(query=query, root=root, limit=limit)
+    if not results:
+        print("[yellow]No matches.[/]")
+        if root is None and not UserConfig.load().scientia_root.strip():
+            print("Set a root once with `tutor scientia set-root <path>`.")
+        raise typer.Exit(1)
+    for i, row in enumerate(results, start=1):
+        print(f"{i:>2}. [green]{row['relpath']}[/]  [dim]score {row['score']}[/]")
+        if row.get("snippet"):
+            print(f"    {row['snippet']}")
 
 
 def main() -> None:

@@ -1,6 +1,7 @@
 {
   "name": "Your Name",
   "email": "you@imperial.ac.uk",
+  "scientia_root": "",
   "preferences": {
     "hint_style": "progressive",
     "reveal_solution_immediately": false,

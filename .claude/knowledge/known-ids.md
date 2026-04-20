@@ -40,7 +40,8 @@ to discover them, or `uv run tutor bb sheets <subject> --resolve` for sheets.
 | COMP40008 | Graphs and Algorithms | `2f5ccfc1-1aac-4344-90a0-b2ee00d10876` |
 | COMP40018 / COMP40012 | Reasoning about Programs (Logic) | `b9547766-6916-474f-8291-b2ee008fc86d` |
 
-CATE scraping is a future addition  -  out of scope for the current pipeline.
+Local Scientia/CATE exports can now be indexed and searched via `tutor scientia ...`.
+Live Scientia scraping is still out of scope for the current pipeline.
 
 ## Panopto gotchas
 

@@ -1,6 +1,6 @@
 # Course map  -  2025-26
 
-_Generated 2026-04-18T21:09:46+00:00._ This file is a human-readable mirror of `course-map.json`. Agents: prefer the JSON for lookups, this markdown for narrative browsing.
+_Generated 2026-04-19T11:20:07+00:00._ This file is a human-readable mirror of `course-map.json`. Agents: prefer the JSON for lookups, this markdown for narrative browsing.
 
 ## Exams
 

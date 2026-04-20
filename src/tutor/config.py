@@ -55,6 +55,7 @@ class Preferences:
 class UserConfig:
     name: str = "Student"
     email: str = ""
+    scientia_root: str = ""
     preferences: Preferences = field(default_factory=Preferences)
     extras: dict[str, Any] = field(default_factory=dict)
 
@@ -67,6 +68,7 @@ class UserConfig:
         return cls(
             name=raw.get("name", "Student"),
             email=raw.get("email", ""),
+            scientia_root=raw.get("scientia_root", ""),
             preferences=prefs,
             extras={k: v for k, v in raw.items() if k not in {"name", "email", "preferences"}},
         )
@@ -75,6 +77,7 @@ class UserConfig:
         raw: dict[str, Any] = {
             "name": self.name,
             "email": self.email,
+            "scientia_root": self.scientia_root,
             "preferences": {
                 "hint_style": self.preferences.hint_style,
                 "reveal_solution_immediately": self.preferences.reveal_solution_immediately,
