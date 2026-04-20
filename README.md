@@ -35,6 +35,7 @@ Then type `/setup` inside Claude Code.
 - **Problem sheet walkthrough** — `/practice analysis sheet-3`, hint ladder, check your attempts.
 - **Local web reader** — `uv run tutor web` renders everything with KaTeX math and a progress tracker.
 - **Scientia/CATE search** — `uv run tutor scientia discover`, `set-root`, `index`, `search` for local document-library exports.
+- **Cache-first archive pulls** — `tutor bb pull` writes a local manifest beside the download so reruns skip files already fetched.
 
 ## Slash commands
 
@@ -57,3 +58,10 @@ Built for MATH40002 (Analysis), MATH40004 (Calculus), MATH40012 (Linear Algebra 
 ## Privacy
 
 Your Imperial SSO cookies live in `auth_state/` (gitignored). Your preferences in `user.config.json` are gitignored. All fetched lectures, notes, and sheets under `subjects/` are gitignored. Nothing personal leaves your machine.
+
+## Fast workflow
+
+- Keep startup cheap: load local notes, the course map, and cached indexes only.
+- Use `tutor auth blackboard` or `tutor auth exams` only when cookies expire or you need a fresh pull.
+- Use `tutor bb pull` and `tutor papers fetch` as explicit refresh commands, not as part of startup.
+- If a Blackboard pull is interrupted, rerun it; the local manifest skips files that are already on disk.

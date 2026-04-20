@@ -271,8 +271,8 @@ def cmd_bb_pull(
 ) -> None:
     """Download every file attachment under a Blackboard content item."""
     out = _subject_dir(subject) / "materials" / _slug(name)
-    written = bb.download_folder_files(course_id, content_id, out, recursive=recursive)
-    print(f"[green]Done[/]  -  {len(written)} files into {out}")
+    written, skipped = bb.download_folder_files(course_id, content_id, out, recursive=recursive)
+    print(f"[green]Done[/]  -  {len(written)} files into {out}  [dim]({skipped} skipped from cache)[/]")
     for p in written[:20]:
         print(f"  OK{p.relative_to(_subject_dir(subject))}")
     if len(written) > 20:
@@ -312,8 +312,8 @@ def cmd_bb_sheets(
         print(f"[dim]Resolved problem-sheets folder:[/] {cid}  -  {match.title}")
 
     out = _subject_dir(subject) / "sheets"
-    written = bb.download_folder_files(meta.bb_course, cid, out, recursive=True)
-    print(f"[green]Done[/]  -  {len(written)} files into {out}")
+    written, skipped = bb.download_folder_files(meta.bb_course, cid, out, recursive=True)
+    print(f"[green]Done[/]  -  {len(written)} files into {out}  [dim]({skipped} skipped from cache)[/]")
     for p in written:
         print(f"  OK{p.relative_to(_subject_dir(subject))}")
 

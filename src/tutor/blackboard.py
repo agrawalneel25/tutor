@@ -13,6 +13,7 @@ This module:
 - `download_folder_files()`  -  grabs every `/bbcswebdav/...` attachment in a subtree.
 """
 from __future__ import annotations
+import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import urljoin, urlparse, parse_qs
@@ -172,21 +173,60 @@ def scrape(course_id: str, content_id: str, max_depth: int = 5) -> list[tuple[li
     return out
 
 
+def _manifest_path(out_dir: Path) -> Path:
+    return out_dir / ".bb-pull-manifest.json"
+
+
+def _load_manifest(path: Path) -> dict[str, dict[str, dict[str, str]]]:
+    if not path.exists():
+        return {"files": {}}
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {"files": {}}
+    files = raw.get("files")
+    if not isinstance(files, dict):
+        files = {}
+    return {"files": {str(k): v for k, v in files.items() if isinstance(v, dict)}}
+
+
+def _save_manifest(path: Path, manifest: dict[str, dict[str, dict[str, str]]]) -> None:
+    path.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
+
+
 def download_folder_files(
     course_id: str,
     content_id: str,
     out_dir: Path,
     recursive: bool = True,
-) -> list[Path]:
-    """Download every attached file in a folder (and optionally its subtree)."""
+) -> tuple[list[Path], int]:
+    """Download every attached file in a folder (and optionally its subtree).
+
+    A small local manifest is written beside `out_dir` so reruns can skip files
+    already downloaded in earlier pulls.
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
     written: list[Path] = []
+    skipped = 0
+    manifest_path = _manifest_path(out_dir)
+    manifest = _load_manifest(manifest_path)
+    manifest_files = manifest["files"]
 
     def _fetch(item: Item, trail: list[str]) -> None:
+        nonlocal skipped
         subdir = out_dir / Path(*[_safe(p) for p in trail]) if trail else out_dir
         subdir.mkdir(parents=True, exist_ok=True)
         with _client() as c:
             for label, url in item.files:
+                cached = manifest_files.get(url)
+                if cached:
+                    rel = cached.get("path", "")
+                    if rel:
+                        cached_path = out_dir / rel
+                        if cached_path.exists():
+                            skipped += 1
+                            written.append(cached_path)
+                            continue
                 # Follow redirects to resolve the actual filename
                 r = c.get(url)
                 r.raise_for_status()
@@ -194,6 +234,10 @@ def download_folder_files(
                 path = subdir / name
                 path.write_bytes(r.content)
                 written.append(path)
+                manifest_files[url] = {
+                    "path": str(path.relative_to(out_dir)),
+                    "label": label,
+                }
 
     if recursive:
         for trail, item in scrape(course_id, content_id):
@@ -204,7 +248,8 @@ def download_folder_files(
             if item.files:
                 _fetch(item, [item.title])
 
-    return written
+    _save_manifest(manifest_path, manifest)
+    return written, skipped
 
 
 def _safe(s: str) -> str:
