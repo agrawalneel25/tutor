@@ -2,6 +2,8 @@
 
 A Claude Code study app for Imperial JMC Year 1. One command, one Imperial login, then you're in exam prep mode: transcripts, rigorous teach notes, dense revision summaries, and a problem-sheet walkthrough.
 
+> Based on [advitrocks9/tutor](https://github.com/advitrocks9/tutor) by [@advitrocks9](https://github.com/advitrocks9).
+
 ## One-line install
 
 **macOS / Linux:**
@@ -32,6 +34,7 @@ Then type `/setup` inside Claude Code.
 - **Exam countdown** — `/study` shows days-until for Linear Algebra (29 Apr), Analysis (5 May), Calculus (6 May) and picks the most valuable next action.
 - **Problem sheet walkthrough** — `/practice analysis sheet-3`, hint ladder, check your attempts.
 - **Local web reader** — `uv run tutor web` renders everything with KaTeX math and a progress tracker.
+- **Scientia/CATE search** — `uv run tutor scientia discover`, `set-root`, `index`, `search` for local document-library exports.
 
 ## Slash commands
 
