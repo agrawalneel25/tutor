@@ -1,0 +1,392 @@
+\documentclass[8pt,a4paper,landscape]{extarticle}
+\usepackage[margin=0.4cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{xcolor}
+
+\setlength{\columnsep}{0.35cm}
+\setlength{\parskip}{1pt}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}{\normalfont\bfseries\small}{}{0em}{}[\vspace{-2pt}\rule{\columnwidth}{0.4pt}]
+\titlespacing{\section}{0pt}{3pt}{1pt}
+\titleformat{\subsection}{\normalfont\bfseries\scriptsize}{}{0em}{}
+\titlespacing{\subsection}{0pt}{2pt}{0pt}
+
+\newcommand{\pf}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dx}{\,dx}
+
+\begin{document}
+\begin{center}{\small\textbf{MATH40004 Calculus \& Applications --- Full Year Cheat Sheet (Papageorgiou)}}\end{center}
+\vspace{-4pt}
+\begin{multicols}{4}
+
+%% ==============================
+\section*{TERM 1}
+
+%% ==============================
+\section*{1. LIMITS}
+
+$\lim_{x\to a}f(x)=L$: $\forall\varepsilon>0\;\exists\delta>0$ s.t.\ $0<|x-a|<\delta\Rightarrow|f(x)-L|<\varepsilon$
+
+\textbf{Standard limits:}
+$\lim_{x\to0}\frac{\sin x}{x}=1$\quad
+$\lim_{x\to0}\frac{\tan x}{x}=1$\quad
+$\lim_{x\to0}(1+x)^{1/x}=e$
+
+\textbf{L'H\^opital} ($0/0$ or $\infty/\infty$): $\lim\frac{f}{g}=\lim\frac{f'}{g'}$
+
+\textbf{Comparison:} if $|f(x)|\leq g(x)$ near $a$ and $g\to0$ then $f\to0$.
+
+\textbf{Indeterminate forms:} $0\cdot\infty,\,\infty-\infty,\,0^0,\,1^\infty$ --- rewrite then L'H\^opital.
+
+%% ==============================
+\section*{2. CONTINUITY \& DIFFERENTIABILITY}
+
+$f$ continuous at $a$: $\lim_{x\to a}f(x)=f(a)$
+
+$f$ differentiable at $a$: $f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h}$ exists.
+
+Differentiable $\Rightarrow$ continuous (not converse).
+
+\textbf{Piecewise:} check left/right limits and derivatives match at join.
+
+\textbf{MVT:} $\exists c\in(a,b)$ s.t.\ $f'(c)=\frac{f(b)-f(a)}{b-a}$
+
+%% ==============================
+\section*{3. DIFFERENTIATION}
+
+\textbf{Chain rule:} $(f\circ g)'(x)=f'(g(x))\cdot g'(x)$
+
+$\frac{d^2}{dx^2}f(g)=f''(g)(g')^2+f'(g)g''$
+
+\textbf{Parametric} ($x=x(t),y=y(t)$):
+$\frac{dy}{dx}=\frac{\dot y}{\dot x}$\qquad
+$\frac{d^2y}{dx^2}=\frac{\frac{d}{dt}(dy/dx)}{\dot x}$
+
+\textbf{Implicit} $F(x,y)=0$: $\frac{dy}{dx}=-\frac{F_x}{F_y}$
+
+\textbf{Log differentiation:} take $\ln$ both sides, differentiate.
+E.g.\ $y=x^x\Rightarrow\ln y=x\ln x\Rightarrow y'/y=\ln x+1$
+
+\textbf{Inverse function:} $(f^{-1})'(y)=\dfrac{1}{f'(x)}$ where $f(x)=y$
+
+%% ==============================
+\section*{4. INTEGRATION TECHNIQUES}
+
+\textbf{By parts:} $\int u\,dv=uv-\int v\,du$\quad (LIATE order)
+
+\textbf{Substitution:} $\int f(g(x))g'(x)\dx=\int f(u)\,du$
+
+\textbf{Trig subs:}
+$\sqrt{a^2-x^2}$: $x=a\sin\theta$\quad
+$\sqrt{a^2+x^2}$: $x=a\tan\theta$\quad
+$\sqrt{x^2-a^2}$: $x=a\sec\theta$
+
+\textbf{Reduction formula} $I_n=\int\sin^n x\dx$:
+$I_n=-\frac{\sin^{n-1}x\cos x}{n}+\frac{n-1}{n}I_{n-2}$
+
+\textbf{Partial fractions:} $\frac{p(x)}{(x-a)(x-b)}=\frac{A}{x-a}+\frac{B}{x-b}$
+
+\textbf{FTC:} $\frac{d}{dx}\int_a^x f(t)\,dt=f(x)$
+
+%% ==============================
+\section*{5. IMPROPER INTEGRALS}
+
+$\int_a^\infty f\dx=\lim_{R\to\infty}\int_a^R f\dx$\quad
+$\int_a^b f\dx=\lim_{\varepsilon\to0^+}\int_{a+\varepsilon}^b f\dx$ (if $f$ blows up at $a$)
+
+\textbf{$p$-test:} $\int_1^\infty x^{-p}\dx$ converges iff $p>1$;\quad
+$\int_0^1 x^{-p}\dx$ converges iff $p<1$
+
+\textbf{Comparison:} $0\leq f\leq g$, $\int g$ converges $\Rightarrow\int f$ converges.
+
+\textbf{Common:} $\int_0^\infty e^{-ax}\dx=\frac{1}{a}$;\quad
+$\int_0^\infty x^{n}e^{-x}\dx=n!$;\quad
+$\int_{-\infty}^\infty e^{-x^2}\dx=\sqrt{\pi}$
+
+For $f=x^{-p}\log x$: at $\infty$ converges iff $p>1$; at $0^+$ converges iff $p<1$.
+
+%% ==============================
+\section*{6. GEOMETRIC APPLICATIONS}
+
+\textbf{Arc length:}
+$L=\int_a^b\sqrt{1+(y')^2}\dx=\int_{t_1}^{t_2}\sqrt{\dot x^2+\dot y^2}\,dt$
+
+\textbf{Volume of revolution} (about $x$-axis, disk method):
+$V=\pi\int_a^b [f(x)]^2\dx$
+
+\textbf{Surface area of revolution} (about $x$-axis):
+$S=2\pi\int_a^b f(x)\sqrt{1+(f')^2}\dx$
+
+\textbf{Centre of mass} (region, uniform density):
+$\bar x=\frac{\int x\,dA}{\int dA}$,\quad $\bar y=\frac{\int y\,dA}{\int dA}$
+
+\textbf{Gabriel's Horn:} $y=1/x$, $x\geq1$ has finite volume $\pi$ but infinite surface area.
+
+%% ==============================
+\section*{7. INFINITE SERIES}
+
+\textbf{Convergence tests:}
+
+\begin{tabular}{@{}ll@{}}
+Ratio & $\lim|a_{n+1}/a_n|<1\Rightarrow$ conv \\
+Root & $\lim|a_n|^{1/n}<1\Rightarrow$ conv \\
+Comparison & $|a_n|\leq b_n$, $\sum b_n$ conv $\Rightarrow$ conv \\
+Alternating & $|a_n|\searrow0\Rightarrow\sum(-1)^na_n$ conv \\
+$p$-series & $\sum n^{-p}$ conv iff $p>1$ \\
+\end{tabular}
+
+\textbf{Radius of convergence} $\sum c_n x^n$:
+$R=\lim\left|\frac{c_n}{c_{n+1}}\right|$ or $R=1/\limsup|c_n|^{1/n}$
+
+%% ==============================
+\section*{8. TAYLOR \& MACLAURIN SERIES}
+
+$f(x)=\sum_{n=0}^\infty\frac{f^{(n)}(a)}{n!}(x-a)^n$
+
+\textbf{Standard series} (memorise):
+\begin{align*}
+e^x&=\sum\frac{x^n}{n!}\\
+\sin x&=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots\\
+\cos x&=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots\\
+\ln(1+x)&=x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots\quad|x|\leq1\\
+(1+x)^s&=1+sx+\frac{s(s-1)}{2!}x^2+\cdots\quad|x|<1\\
+\arctan x&=x-\frac{x^3}{3}+\frac{x^5}{5}-\cdots\quad|x|\leq1
+\end{align*}
+
+\textbf{Remainder:} $R_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}$ for some $c$.
+
+%% ==============================
+\section*{9. FOURIER SERIES}
+
+$f(x)\sim\frac{a_0}{2}+\sum_{k=1}^\infty\left(a_k\cos\frac{k\pi x}{L}+b_k\sin\frac{k\pi x}{L}\right)$
+
+\textbf{Coefficients} (period $2L$):
+$a_k=\frac{1}{L}\int_{-L}^L f(x)\cos\frac{k\pi x}{L}\dx$\quad
+$b_k=\frac{1}{L}\int_{-L}^L f(x)\sin\frac{k\pi x}{L}\dx$
+
+\textbf{Even $f$:} $b_k=0$, cosine series only.
+\textbf{Odd $f$:} $a_k=0$, sine series only.
+
+\textbf{Convergence:} at jump discontinuity, series converges to average of left/right limits.
+
+\textbf{Parseval:} $\frac{1}{L}\int_{-L}^L|f|^2\dx=\frac{a_0^2}{2}+\sum_{k=1}^\infty(a_k^2+b_k^2)$
+
+\textbf{Differentiation:} valid term-by-term if $f$ continuous and $f'$ piecewise continuous.
+
+%% ==============================
+\section*{TERM 2}
+
+%% ==============================
+\section*{10. FOURIER TRANSFORMS}
+
+$\hat f(\omega)=\int_{-\infty}^\infty f(x)e^{-i\omega x}\dx$\quad
+$f(x)=\frac{1}{2\pi}\int\hat f(\omega)e^{i\omega x}\,d\omega$
+
+\textbf{Key pair:} $e^{-a|x|}\leftrightarrow\dfrac{2a}{a^2+\omega^2}$
+
+\begin{tabular}{@{}ll@{}}
+Shift $x$ & $e^{-i\omega x_0}\hat f(\omega)$ \\
+Derivative & $(i\omega)^n\hat f(\omega)$ \\
+Scaling & $\frac{1}{a}\hat f(\omega/a)$ \\
+Symmetry & $\mathcal{F}\{\hat f(x)\}=2\pi f(-\omega)$ \\
+$xf$ & $i\hat f'(\omega)$ \\
+\end{tabular}
+
+\textbf{Convolution:} $\mathcal{F}\{f*g\}=\hat f\cdot\hat g$
+
+\textbf{Parseval:} $\int|f|^2\dx=\frac{1}{2\pi}\int|\hat f|^2\,d\omega$
+
+\textbf{Delta:} $\mathcal{F}\{\delta\}=1$;\quad $\int g\,\delta(x-a)\dx=g(a)$
+
+%% ==============================
+\section*{11. FIRST-ORDER ODEs}
+
+\begin{tabular}{@{}p{1.4cm}p{2.6cm}@{}}
+\toprule
+Type & Method \\
+\midrule
+Separable & $\int\frac{dy}{F_2(y)}=\int F_1(x)\dx$ \\
+Linear & I.F. $I=e^{\int p\dx}$; $\frac{d}{dx}[Iy]=Iq$ \\
+Homogeneous & $u=y/x$ \\
+Bernoulli & $u=y^{1-n}$ \\
+Exact & find $u$: $u_x=F,\,u_y=G$ \\
+\bottomrule
+\end{tabular}
+
+\textbf{Exact test:} $\pf{F}{y}=\pf{G}{x}$. Solution: $u=C$.
+
+\textbf{Not exact:} try $\lambda(x)$; need $(\pf{F}{y}-\pf{G}{x})/G=h(x)$ only $\Rightarrow\lambda=e^{\int h\dx}$.
+
+%% ==============================
+\section*{12. HIGHER-ORDER ODEs}
+
+$y_{GS}=y_{CF}+y_{PI}$. Sub $y=e^{\lambda x}$ for auxiliary eq.
+
+\begin{tabular}{@{}ll@{}}
+Distinct $\lambda_{1,2}$ & $c_1e^{\lambda_1 x}+c_2e^{\lambda_2 x}$ \\
+$a\pm ib$ & $e^{ax}(c_1\cos bx+c_2\sin bx)$ \\
+Repeated $\lambda$ & $(c_1+c_2x)e^{\lambda x}$ \\
+\end{tabular}
+
+\textbf{PI ansatz:} $e^{bx}\to Ae^{bx}$ (or $Ax^me^{bx}$ if resonant); $\cos/\sin\to A\cos+B\sin$; poly$\to$poly.
+
+\textbf{Euler--Cauchy} $x^ny^{(n)}+\cdots$: sub $x=e^z$.
+
+\textbf{2nd-order special cases:}
+
+\begin{tabular}{@{}ll@{}}
+$y''=F(x,y')$ & $u=y'$ \\
+$y''=F(y)$ & $u\,du/dy=F(y)$ \\
+$y''=F(y,y')$ & $u\,du/dy=F(y,u)$ \\
+\end{tabular}
+
+%% ==============================
+\section*{13. SYSTEMS OF LINEAR ODEs}
+
+$\dot{\mathbf{y}}=A\mathbf{y}$.\quad Distinct $\lambda_i$: $\mathbf{y}=\sum c_i e^{\lambda_i t}\mathbf{v}_i$
+
+\textbf{Repeated $\lambda$, non-diag:} find $\mathbf{w}$: $(A-\lambda I)\mathbf{w}=\mathbf{v}$
+$\mathbf{y}=c_1e^{\lambda t}\mathbf{v}+c_2(te^{\lambda t}\mathbf{v}+e^{\lambda t}\mathbf{w})$
+
+Forced: $\mathbf{y}_{PI}=-A^{-1}\mathbf{g}$ (constant $\mathbf{g}$).
+
+%% ==============================
+\section*{14. PHASE PLANE}
+
+$\tau=\mathrm{tr}(A)$, $\Delta=\det(A)$, $\lambda=\frac{\tau\pm\sqrt{\tau^2-4\Delta}}{2}$
+
+\begin{tabular}{@{}p{2.8cm}ll@{}}
+\toprule
+Condition & Type & Stab \\
+\midrule
+$\Delta<0$ & Saddle & $\times$ \\
+$\Delta>\tau^2/4$, $\tau<0$ & Stable spiral & $\checkmark$ \\
+$\Delta>\tau^2/4$, $\tau>0$ & Unstable spiral & $\times$ \\
+$\Delta>\tau^2/4$, $\tau=0$ & Centre & Lyap \\
+$0<\Delta<\tau^2/4$, $\tau<0$ & Stable node & $\checkmark$ \\
+$0<\Delta<\tau^2/4$, $\tau>0$ & Unstable node & $\times$ \\
+$\Delta=\tau^2/4$, diag & Star node & $\pm$ \\
+$\Delta=\tau^2/4$, non-diag & Degen.\ node & $\pm$ \\
+\bottomrule
+\end{tabular}
+
+\textbf{Portrait checklist:} state $\tau,\Delta$; name type; eigenvectors as straight lines; arrows; curved trajectories asymptotic to slower eigenvector.
+
+\textbf{Damped oscillator:} $\ddot x+2k\dot x+\omega^2 x=0$. $\tau=-2k$, $\Delta=\omega^2$. Varying $k$ slides horizontally across $\tau$-$\Delta$ plane.
+
+%% ==============================
+\section*{15. NONLINEAR STABILITY}
+
+\textbf{1D:} $\dot y=f(y)$, fixed pt $f(y^*)=0$.
+$\eta=y-y^*\Rightarrow\dot\eta\approx f'(y^*)\eta$
+
+$f'(y^*)<0$: stable;\quad $>0$: unstable;\quad $=0$: inconclusive.
+
+\textbf{2D:} Jacobian $J_{ij}=\pf{F_i}{y_j}$ at $\mathbf{y}^*$. Classify via $\tau=\mathrm{tr}(J)$, $\Delta=\det(J)$.
+
+Find nullclines; intersections $=$ fixed points.
+
+%% ==============================
+\section*{16. 1D BIFURCATIONS}
+
+\textbf{Draw:} $y^*$ vs $r$; solid=stable, dashed=unstable; arrows; name bifurcation.
+
+\begin{tabular}{@{}p{1.6cm}p{2.4cm}@{}}
+\toprule
+Name & Normal form \\
+\midrule
+Saddle-node & $\dot y=r+y^2$ \\
+Transcritical & $\dot y=ry-y^2$ \\
+Supercritical pitchfork & $\dot y=ry-y^3$ \\
+Subcritical pitchfork & $\dot y=ry+y^3$ \\
+\bottomrule
+\end{tabular}
+
+\textbf{Saddle-node:} 2 fps collide \& vanish. \textbf{Trans:} 2 fps swap stability. \textbf{Super:} 1 stable $\to$ 2 stable $+$ 1 unstable (symmetry breaking). \textbf{Sub:} dangerous --- unstable fps bound basin, trajectories escape to $\infty$.
+
+Super vs sub: sign of cubic. $-y^3$ stabilising; $+y^3$ destabilising.
+
+%% ==============================
+\section*{17. PARTIAL DIFFERENTIATION}
+
+$\pf{f}{x_i}=\lim_{h\to0}\frac{f(\ldots,x_i+h,\ldots)-f(\ldots)}{h}$
+
+\textbf{Schwarz:} $f_{xy}=f_{yx}$ (cont.\ 2nd partials). Used in exact ODE test.
+
+\textbf{Total diff:} $df=f_x\dx+f_y\,dy$
+
+\textbf{Chain rule} $x(t),y(t)$: $\dot f=f_x\dot x+f_y\dot y$
+
+\textbf{Implicit} $F(x,y,z)=0$: $\pf{z}{x}=-F_x/F_z$
+
+\textbf{Reciprocity:} $\left(\pf{p}{V}\right)_T\!\left(\pf{V}{T}\right)_p\!\left(\pf{T}{p}\right)_V=-1$
+
+%% ==============================
+\section*{18. TAYLOR FOR $f(x,y)$ \& ERRORS}
+
+$f(\mathbf{x}_0+\boldsymbol\delta)=f+\nabla f\cdot\boldsymbol\delta+\tfrac12\boldsymbol\delta^T H\boldsymbol\delta+\cdots$
+
+$H=\begin{pmatrix}f_{xx}&f_{xy}\\f_{yx}&f_{yy}\end{pmatrix}$
+
+\textbf{Abs error:} $|\delta f|\leq|f_x||\delta x|+|f_y||\delta y|$
+
+\textbf{\%age error:} $|\delta f/f|\leq|\partial\ln f/\partial x||\delta x|+|\partial\ln f/\partial y||\delta y|$
+
+%% ==============================
+\section*{19. STATIONARY POINTS}
+
+\textbf{Step 1:} Solve $f_x=0$ and $f_y=0$.
+
+\textbf{Step 2:} $\Delta=f_{xx}f_{yy}-(f_{xy})^2$
+
+\begin{tabular}{@{}lll@{}}
+$\Delta>0$, $f_{xx}>0$ & min & \\
+$\Delta>0$, $f_{xx}<0$ & max & \\
+$\Delta<0$ & saddle & \\
+$\Delta=0$ & inconclusive & \\
+\end{tabular}
+
+%% ==============================
+\section*{20. EXACT ODEs}
+
+Test: $\pf{F}{y}=\pf{G}{x}$. Solution: $u(x,y)=C$.
+
+Integrate $F$ w.r.t.\ $x\to u+\phi(y)$; use $u_y=G$ to find $\phi'(y)$.
+
+\textbf{Not exact:} $\lambda(x)$ if $(\pf{F}{y}-\pf{G}{x})/G=h(x)$, then $\lambda=e^{\int h\dx}$.
+
+%% ==============================
+\section*{21. PDEs}
+
+\textbf{Wave:} $u_{tt}=c^2u_{xx}$. D'Alembert: $u=f(x-ct)+g(x+ct)$.
+
+\textbf{Laplace:} $u_{xx}+u_{yy}=0$. Radial: $u=A\ln r+B$.
+
+\textbf{Jacobian:} $dx\,dy=|J|\,du\,dv$. Polar: $dx\,dy=r\,dr\,d\theta$.
+
+%% ==============================
+\section*{EXAM CHECKLISTS}
+
+\textbf{Improper integral:} split at singularity; use $p$-test or comparison; state limit explicitly.
+
+\textbf{Series:} apply ratio test first; if $=1$, try comparison or alternating.
+
+\textbf{Fourier series:} check odd/even first (halves the work); state convergence at discontinuities.
+
+\textbf{Phase portrait:} $\tau,\Delta\to$ type; eigenvectors with arrows; asymptotic curves; label.
+
+\textbf{Bifurcation diagram:} solid/dashed; flow arrows; name type; mark critical $r$.
+
+\textbf{Exact ODE:} check condition; integrate; use $u_y=G$ to find $\phi$; write $u=C$.
+
+\textbf{Stationary pts:} solve both partials; compute $\Delta$ at each; if $\Delta=0$ say inconclusive.
+
+\end{multicols}
+\end{document}
