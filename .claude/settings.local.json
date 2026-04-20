@@ -12,7 +12,10 @@
       "Bash(Select-Object *)",
       "Bash(Where-Object *)",
       "Bash(ForEach-Object *)",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Bash(pdftotext -v)",
+      "Bash(python -c \"import fitz; print\\('pymupdf ok'\\)\")",
+      "Bash(python -c \"import pdfplumber; print\\('pdfplumber ok'\\)\")"
     ]
   }
 }
