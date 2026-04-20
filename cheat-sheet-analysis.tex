@@ -1,0 +1,276 @@
+\documentclass[8pt,a4paper,landscape]{extarticle}
+\usepackage[margin=0.4cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{parskip}
+
+\setlength{\columnsep}{0.35cm}
+\setlength{\parskip}{1pt}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}{\normalfont\bfseries\small}{}{0em}{}[\vspace{-2pt}\rule{\columnwidth}{0.4pt}]
+\titlespacing{\section}{0pt}{3pt}{1pt}
+
+\begin{document}
+\begin{center}{\small\textbf{MATH40002 Analysis 1 --- Full Year Cheat Sheet}}\end{center}
+\vspace{-4pt}
+\begin{multicols}{4}
+
+%% ==============================
+\section*{1. REAL NUMBERS \& SUPREMUM}
+
+\textbf{Completeness axiom:} Every non-empty set $S\subset\mathbb{R}$ bounded above has a supremum $\sup S\in\mathbb{R}$.
+
+\textbf{Supremum definition:} $M=\sup S$ iff:
+(i) $x\leq M$ for all $x\in S$;
+(ii) $\forall\varepsilon>0\;\exists x\in S$ s.t.\ $x>M-\varepsilon$.
+
+\textbf{Infimum:} $m=\inf S$ iff (i) $x\geq m$ $\forall x\in S$; (ii) $\forall\varepsilon>0\;\exists x\in S$ s.t.\ $x<m+\varepsilon$.
+
+\textbf{Archimedean property:} $\forall x\in\mathbb{R}\;\exists n\in\mathbb{N}$ s.t.\ $n>x$.
+
+\textbf{Density of $\mathbb{Q}$:} Between any two reals lies a rational.
+
+%% ==============================
+\section*{2. COUNTABILITY}
+
+$S$ is \textbf{countable} if there is a bijection $S\to\mathbb{N}$ (or $S$ finite).
+
+\textbf{Countable:} $\mathbb{N},\mathbb{Z},\mathbb{Q}$, finite unions/products of countable sets.
+
+\textbf{Uncountable:} $\mathbb{R}$, $[0,1]$, $\mathbb{R}\setminus\mathbb{Q}$.
+
+\textbf{Cantor diagonal argument:} Suppose $[0,1]=\{x_1,x_2,\ldots\}$. Construct $y$ with $y_n\neq(x_n)_n$ (the $n$-th decimal of $x_n$). Then $y\in[0,1]$ but $y\neq x_n$ for all $n$. Contradiction.
+
+\textbf{Countable union of countable sets is countable.}
+
+\textbf{Key:} set of all sequences $\{0,1\}^\mathbb{N}$ is uncountable (diagonal argument).
+
+%% ==============================
+\section*{3. SEQUENCES}
+
+\textbf{Convergence ($\varepsilon$-$N$):} $a_n\to L$ iff $\forall\varepsilon>0\;\exists N$ s.t.\ $n\geq N\Rightarrow|a_n-L|<\varepsilon$.
+
+\textbf{Uniqueness of limits.} \textbf{Limits preserve $\leq$.}
+
+\textbf{Algebra of limits:} $a_n\to L$, $b_n\to M$ $\Rightarrow$ $a_n\pm b_n\to L\pm M$, $a_nb_n\to LM$, $a_n/b_n\to L/M$ ($M\neq0$).
+
+\textbf{Squeeze theorem:} $a_n\leq b_n\leq c_n$ and $a_n,c_n\to L$ $\Rightarrow$ $b_n\to L$.
+
+\textbf{Monotone convergence:} Monotone + bounded $\Rightarrow$ convergent.
+Increasing + bounded above $\to\sup$.
+
+\textbf{Bolzano--Weierstrass:} Every bounded sequence has a convergent subsequence.
+
+\textbf{Peak point proof:} $n$ is a peak if $a_n\geq a_k$ for all $k\geq n$. Either infinitely many peaks (give decreasing subseq) or finitely many (get increasing subseq). Either way, monotone subseq exists; bounded $\Rightarrow$ convergent.
+
+\textbf{Subsequence:} If $a_n\to L$ then every subsequence $\to L$. Contrapositive: two subsequences with different limits $\Rightarrow$ divergent.
+
+%% ==============================
+\section*{4. CAUCHY SEQUENCES}
+
+\textbf{Definition:} $(a_n)$ Cauchy iff $\forall\varepsilon>0\;\exists N$ s.t.\ $m,n\geq N\Rightarrow|a_m-a_n|<\varepsilon$.
+
+\textbf{Theorem:} In $\mathbb{R}$: convergent $\iff$ Cauchy.
+
+\textbf{Proof sketch} ($\Rightarrow$): $|a_m-a_n|\leq|a_m-L|+|L-a_n|<\varepsilon/2+\varepsilon/2$.
+
+($\Leftarrow$): Cauchy $\Rightarrow$ bounded $\Rightarrow$ (BW) has convergent subseq $a_{n_k}\to L$ $\Rightarrow$ whole seq $\to L$.
+
+\textbf{Cauchy $\Rightarrow$ bounded.}
+
+%% ==============================
+\section*{5. SERIES}
+
+$\sum_{n=1}^\infty a_n$ converges iff partial sums $S_N=\sum_{n=1}^N a_n$ converge.
+
+\textbf{Necessary condition:} $a_n\to0$ (divergence test: if not, series diverges).
+
+\textbf{Comparison:} $0\leq a_n\leq b_n$; $\sum b_n$ conv $\Rightarrow\sum a_n$ conv; $\sum a_n$ div $\Rightarrow\sum b_n$ div.
+
+\textbf{Ratio test:} $L=\lim|a_{n+1}/a_n|$. $L<1$: abs conv; $L>1$: div; $L=1$: inconclusive.
+
+\textbf{Root test:} $L=\limsup|a_n|^{1/n}$. Same conclusion.
+
+\textbf{Alternating series test:} $|a_n|$ decreasing, $a_n\to0$ $\Rightarrow\sum(-1)^na_n$ converges.
+
+\textbf{Absolute convergence:} $\sum|a_n|$ conv $\Rightarrow\sum a_n$ conv (not converse).
+
+\textbf{Conditional convergence:} converges but not absolutely (e.g.\ $\sum(-1)^n/n$).
+
+\textbf{Cauchy product:} $(\sum a_n)(\sum b_n)=\sum c_n$ where $c_n=\sum_{k=0}^n a_k b_{n-k}$. Valid if both abs conv.
+
+\textbf{$p$-series:} $\sum n^{-p}$ conv iff $p>1$.
+
+\textbf{Geometric:} $\sum_{n=0}^\infty r^n=\frac{1}{1-r}$ for $|r|<1$.
+
+\textbf{Ces\`aro means:} $b_n=\frac{1}{n}\sum_{k=1}^n a_k$. If $a_n\to L$ then $b_n\to L$ (converse false).
+
+%% ==============================
+\section*{6. LIMITS OF FUNCTIONS}
+
+\textbf{$\varepsilon$-$\delta$ definition:} $\lim_{x\to a}f(x)=L$ iff $\forall\varepsilon>0\;\exists\delta>0$ s.t.\ $0<|x-a|<\delta\Rightarrow|f(x)-L|<\varepsilon$.
+
+\textbf{Sequential criterion:} $\lim_{x\to a}f(x)=L$ iff for every sequence $x_n\to a$ ($x_n\neq a$), $f(x_n)\to L$.
+
+\textbf{Negation:} $\lim_{x\to a}f(x)\neq L$ iff $\exists\varepsilon>0$ s.t.\ $\forall\delta>0\;\exists x$ with $0<|x-a|<\delta$ and $|f(x)-L|\geq\varepsilon$.
+
+\textbf{Algebra of limits} (same as sequences).
+
+%% ==============================
+\section*{7. CONTINUITY}
+
+\textbf{$\varepsilon$-$\delta$:} $f$ continuous at $a$ iff $\forall\varepsilon>0\;\exists\delta>0$ s.t.\ $|x-a|<\delta\Rightarrow|f(x)-f(a)|<\varepsilon$.
+
+\textbf{Sequential:} $f$ cont.\ at $a$ iff $x_n\to a\Rightarrow f(x_n)\to f(a)$.
+
+Sums, products, compositions of continuous functions are continuous.
+
+\textbf{Uniform continuity:} $\forall\varepsilon>0\;\exists\delta>0$ s.t.\ $|x-y|<\delta\Rightarrow|f(x)-f(y)|<\varepsilon$ (same $\delta$ for all $x,y$).
+
+\textbf{Uniform vs pointwise:} $f'$ bounded $\Rightarrow$ $f$ uniformly continuous (use MVT).
+
+\textbf{Extreme Value Theorem:} $f$ continuous on $[a,b]$ (closed, bounded) $\Rightarrow$ $f$ attains its max and min.
+
+\textbf{Intermediate Value Theorem:} $f$ continuous on $[a,b]$, $f(a)<c<f(b)$ $\Rightarrow\exists x\in(a,b)$ s.t.\ $f(x)=c$.
+
+\textbf{Continuous on $[a,b]$ $\Rightarrow$ bounded and uniformly continuous.}
+
+\textbf{Dirichlet function:} $f(x)=1$ ($x\in\mathbb{Q}$), $0$ ($x\notin\mathbb{Q}$) --- discontinuous everywhere. Modified Dirichlet ($xf(x)$) --- continuous only at $0$.
+
+%% ==============================
+\section*{8. DIFFERENTIATION}
+
+\textbf{Definition:} $f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h}$.
+
+Differentiable at $a$ $\Rightarrow$ continuous at $a$ (not converse: $|x|$ at $0$).
+
+\textbf{Rules:} sum, product, quotient, chain (all standard).
+
+\textbf{Rolle's theorem:} $f$ cont.\ on $[a,b]$, diff.\ on $(a,b)$, $f(a)=f(b)$ $\Rightarrow\exists c\in(a,b)$ s.t.\ $f'(c)=0$.
+
+\textbf{Mean Value Theorem:} $f$ cont.\ on $[a,b]$, diff.\ on $(a,b)$ $\Rightarrow\exists c$ s.t.\ $f'(c)=\frac{f(b)-f(a)}{b-a}$.
+
+\textbf{Corollaries of MVT:}
+- $f'=0$ on $(a,b)$ $\Rightarrow$ $f$ constant.
+- $f'>0$ on $(a,b)$ $\Rightarrow$ $f$ strictly increasing.
+- $|f'|\leq M$ $\Rightarrow$ $|f(x)-f(y)|\leq M|x-y|$ $\Rightarrow$ $f$ Lipschitz $\Rightarrow$ uniformly continuous.
+
+\textbf{IVP for derivatives (Darboux):} $f'$ need not be continuous, but satisfies IVP --- if $f'(a)<c<f'(b)$ then $\exists x$ s.t.\ $f'(x)=c$.
+
+\textbf{Symmetric $f$:} $f(-x)=f(x)$ $\Rightarrow$ $f'(0)=0$ (if it exists).
+
+%% ==============================
+\section*{9. RIEMANN INTEGRATION}
+
+\textbf{Partition:} $P=\{x_0=a<x_1<\cdots<x_n=b\}$.
+
+\textbf{Upper/lower sums:}
+$U(f,P)=\sum_{i=1}^n M_i(x_i-x_{i-1})$, $M_i=\sup_{[x_{i-1},x_i]}f$
+
+$L(f,P)=\sum_{i=1}^n m_i(x_i-x_{i-1})$, $m_i=\inf_{[x_{i-1},x_i]}f$
+
+\textbf{Key facts:} $L(f,P)\leq L(f,Q)$ for any refinement $Q\supseteq P$; $L(f,P)\leq U(f,Q)$ for any two partitions.
+
+\textbf{Riemann integrable:} $\inf_P U(f,P)=\sup_P L(f,P)$ (upper integral = lower integral).
+
+\textbf{Integrability criterion:} $f$ integrable iff $\forall\varepsilon>0\;\exists P$ s.t.\ $U(f,P)-L(f,P)<\varepsilon$.
+
+\textbf{Integrable classes:}
+- Continuous on $[a,b]$ $\Rightarrow$ integrable.
+- Monotone on $[a,b]$ $\Rightarrow$ integrable.
+- Bounded with finitely many discontinuities $\Rightarrow$ integrable.
+- Changing $f$ at finitely many points preserves integrability and does not change $\int f$.
+
+\textbf{Properties:}
+- Linearity: $\int(af+bg)=a\int f+b\int g$.
+- Monotonicity: $f\leq g$ $\Rightarrow\int f\leq\int g$.
+- Additivity: $\int_a^b f=\int_a^c f+\int_c^b f$.
+- $f\geq0$ continuous and $\int_a^b f=0$ $\Rightarrow$ $f\equiv0$.
+
+\textbf{FTC Part 1:} $F(x)=\int_a^x f(t)\,dt$; if $f$ cont.\ at $x$ then $F'(x)=f(x)$.
+
+\textbf{FTC Part 2:} $\int_a^b f=F(b)-F(a)$ if $F'=f$ and $f$ integrable.
+
+%% ==============================
+\section*{10. PROOF TOOLKIT}
+
+\textbf{To show $a_n\to L$:} Find explicit $N(\varepsilon)$ s.t.\ $n\geq N\Rightarrow|a_n-L|<\varepsilon$. Often use algebra then AM-GM or triangle inequality.
+
+\textbf{To show divergence:} Find two subsequences with different limits, OR show $a_n\not\to0$ (if series), OR exhibit $\varepsilon$ for which no $N$ works.
+
+\textbf{To show $\sup S=M$:} (i) show every $x\in S$ satisfies $x\leq M$; (ii) show $\forall\varepsilon>0\;\exists x\in S$ with $x>M-\varepsilon$.
+
+\textbf{To show $f$ not uniformly continuous:} Find sequences $x_n,y_n$ with $|x_n-y_n|\to0$ but $|f(x_n)-f(y_n)|\not\to0$. (E.g.\ $f=x^2$ on $\mathbb{R}$: $x_n=n$, $y_n=n+1/n$.)
+
+\textbf{To show $f$ integrable:} Exhibit partition $P$ with $U-L<\varepsilon$, or cite a theorem (monotone/continuous).
+
+\textbf{Triangle inequality:} $|a+b|\leq|a|+|b|$;\quad $||a|-|b||\leq|a-b|$.
+
+\textbf{Bernoulli:} $(1+x)^n\geq1+nx$ for $x>-1$, $n\in\mathbb{N}$.
+
+%% ==============================
+\section*{11. RECURRING EXAM PATTERNS}
+
+\textbf{True/False + proof or counterexample} (every paper, 4 parts):
+Think: is it obviously true (prove it), or does it fail for a specific function/sequence?
+
+\textbf{Good counterexamples to know:}
+
+\begin{tabular}{@{}p{3.2cm}p{2.8cm}@{}}
+\toprule
+Claim & Counterexample \\
+\midrule
+Convergent $\Rightarrow$ mono & $(-1)^n/n$ \\
+Cont $\Rightarrow$ unif cont & $x^2$ on $\mathbb{R}$ \\
+$f'$ exists $\Rightarrow$ $f'$ cont & $x^2\sin(1/x)$ at $0$ \\
+$\sum a_n$ conv $\Rightarrow\sum a_n^2$ conv & $a_n=(-1)^n/\sqrt{n}$ \\
+$a_n\to0\Rightarrow\sum a_n$ conv & $\sum1/n$ \\
+$f$ diff, $f\to0\Rightarrow f'\to0$ & $\sin(e^x)/x$ \\
+IVT $\Rightarrow$ min/max & open interval $(0,1)$ \\
+\bottomrule
+\end{tabular}
+
+\textbf{Recursive sequences} ($a_{n+1}=g(a_n)$): show monotone (by induction) and bounded $\Rightarrow$ convergent; find limit by $L=g(L)$.
+
+\textbf{Ces\`aro / weighted means:} if $a_n\to L$, show $b_n=(1/n)\sum a_k\to L$ by splitting sum at some $N$ where tail is small.
+
+\textbf{Supremum from first principles:} don't use algebra of limits --- use only the definition of $\sup$.
+
+%% ==============================
+\section*{12. KEY THEOREMS (PROOF SKETCHES)}
+
+\textbf{Bolzano--Weierstrass:}
+Peak-point argument (see \S3). OR: bisect $[a,b]$; one half contains infinitely many terms; repeat --- nested intervals give a limit point.
+
+\textbf{EVT:} $f$ cont on $[a,b]$ $\Rightarrow$ $f$ bounded (compact image); $\sup f(x)$ is attained. Suppose not: $(x_n)$ s.t.\ $f(x_n)\to\sup f$; BW gives subseq $x_{n_k}\to c\in[a,b]$; continuity $\Rightarrow f(c)=\sup f$.
+
+\textbf{IVT:} Bisection: let $c=(a+b)/2$; if $f(c)=0$ done; else restrict to half where sign changes; nested intervals converge to root.
+
+\textbf{MVT:} Apply Rolle to $h(x)=f(x)-\frac{f(b)-f(a)}{b-a}(x-a)$.
+
+\textbf{Monotone integrable:} For monotone $f$ on $[a,b]$ and uniform partition mesh $\delta=(b-a)/n$:
+$U-L=\sum(M_i-m_i)\delta=(f(b)-f(a))\delta=(f(b)-f(a))(b-a)/n<\varepsilon$ for large $n$.
+
+\textbf{Continuous integrable:} Continuous on $[a,b]$ $\Rightarrow$ uniformly continuous $\Rightarrow$ for any $\varepsilon$, choose $\delta$ s.t.\ $|x-y|<\delta\Rightarrow|f(x)-f(y)|<\varepsilon/(b-a)$; take mesh $<\delta$; then $U-L<\varepsilon$.
+
+%% ==============================
+\section*{EXAM CHECKLISTS}
+
+\textbf{$\varepsilon$-$N$ proof:} state what $N$ is explicitly; show $n\geq N\Rightarrow|a_n-L|<\varepsilon$; don't just verify, derive $N$.
+
+\textbf{$\varepsilon$-$\delta$ proof:} choose $\delta$ explicitly in terms of $\varepsilon$; may need $\delta\leq1$ to bound auxiliary terms.
+
+\textbf{Series:} state which test; verify all hypotheses of the test; conclude.
+
+\textbf{Integrability:} either cite theorem (monotone/continuous) with justification, or construct an explicit partition.
+
+\textbf{Counterexample:} exhibit the object, verify it satisfies all hypotheses, show conclusion fails.
+
+\textbf{Supremum:} always check both parts of definition --- upper bound AND approximation property.
+
+\end{multicols}
+\end{document}
